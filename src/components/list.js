@@ -64,6 +64,16 @@ class List extends React.Component {
     };*/
     const columns = [
     {
+      Header: 'NPGRL CEREALS No',
+      accessor: 'npgrl_cereals_no',
+      className: 'center',
+      id: "npgrl_cereals_no",
+      // accessor: d => d.cguard_npgrl,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["npgrl_cereals_no"] }),
+      filterAll: true
+    },
+    {
       Header: 'CGUARD Region',
       accessor: 'cguard_region',
       className: 'center',
@@ -72,27 +82,7 @@ class List extends React.Component {
       filterMethod: (filter, rows) =>
         matchSorter(rows, filter.value, { keys: ["cguard_region"] }),
       filterAll: true
-    }, 
-    {
-      Header: 'CGUARD N',
-      accessor: 'cguard_n',
-      className: 'center',
-      id: "cguard_n",
-      // accessor: d => d.cguard_n,
-      filterMethod: (filter, rows) =>
-        matchSorter(rows, filter.value, { keys: ["cguard_n"] }),
-      filterAll: true
-    },
-    {
-      Header: 'CGUARD NPGRL',
-      accessor: 'cguard_npgrl',
-      className: 'center',
-      id: "cguard_npgrl",
-      // accessor: d => d.cguard_npgrl,
-      filterMethod: (filter, rows) =>
-        matchSorter(rows, filter.value, { keys: ["cguard_npgrl"] }),
-      filterAll: true
-    },
+    },     
     {
       Header: 'GB No',
       accessor: 'gb_no',
@@ -104,6 +94,26 @@ class List extends React.Component {
       filterAll: true
     },
     {
+      Header: 'PHL',
+      accessor: 'phl',
+      className: 'center',
+      id: "phl",
+      // accessor: d => d.gb_no,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["phl"] }),
+      filterAll: true
+    },
+    {
+      Header: 'ACC',
+      accessor: 'acc',
+      className: 'center',
+      id: "acc",
+      // accessor: d => d.gb_no,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["acc"] }),
+      filterAll: true
+    },
+    {
       Header: 'APN',
       accessor: 'apn',
       className: 'center',
@@ -112,7 +122,17 @@ class List extends React.Component {
       filterMethod: (filter, rows) =>
         matchSorter(rows, filter.value, { keys: ["apn"] }),
       filterAll: true
-    },    
+    },
+    {
+      Header: 'Other No',
+      accessor: 'other_no',
+      className: 'center',
+      id: "other_no",
+      // accessor: d => d.gb_no,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["other_no"] }),
+      filterAll: true
+    },      
     {
       Header: 'Local Name',
       accessor: 'local_name',
@@ -159,6 +179,33 @@ class List extends React.Component {
         </select>
     },
     {
+      Header: 'Crop',
+      accessor: 'crop',
+      className: 'center',
+      id: "crop",
+      // Cell: ({ value }) => (value >= 21 ? "Yes" : "No"),
+      filterMethod: (filter, row) => {
+        if (filter.value === "all") {
+          return true;
+        }
+        if (filter.value) {      
+          return row[filter.id] === filter.value;
+        }
+        return row[filter.id] < 21;
+      },
+      Filter: ({ filter, onChange }) =>
+        <select
+          onChange={event => onChange(event.target.value)}
+          style={{ width: "100%" }}
+          value={filter ? filter.value : "all"}
+        >
+          <option value="all">Show All</option>
+          <option>Corn</option>
+          <option>Adlay</option>
+          <option>Sorghum</option>          
+        </select>
+    },
+    {
       Header: '',
       Cell:row => (
         <div>      
@@ -190,7 +237,7 @@ class List extends React.Component {
       <div className="container">      
         <NavLink to ="registration/create">
           <Button bsStyle="success">
-            Create Registration Data
+            Create Registration
           </Button>
         </NavLink>
         

@@ -32,7 +32,7 @@ class Home extends Component {
     return (
       <div className="container">
         <div className="row">         
-          <h2>Registration Data</h2>                         
+          <h2>Registration</h2>                         
 
           {this.state.loading === true ? (
             <div className="loader">
