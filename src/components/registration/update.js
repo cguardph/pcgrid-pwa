@@ -8,14 +8,16 @@ class UpdateRegistration extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      npgrl_cereals_no: '',
       cguard_region: '',
-      cguard_n: '',
-      cguard_npgrl: '',
       gb_no: '',
+      phl: '',
+      acc: '',
       apn: '',
+      other_no: '',
       local_name: '',
       region: 'Region I',
-      loading: true,
+      crop: 'Corn',
       show: false,
       regId: this.props.match.params.regId
     };    
@@ -55,23 +57,28 @@ class UpdateRegistration extends Component {
   }
 
   handleSubmit(event) {
-    console.log('registration/'+this.state.regId);
-    const cguard_region = this.state.cguard_region;
-    const cguard_n = this.state.cguard_n;
-    const cguard_npgrl = this.state.cguard_npgrl;
+    const npgrl_cereals_no = this.state.npgrl_cereals_no;
+    const cguard_region = this.state.cguard_region;    
     const gb_no = this.state.gb_no;
+    const phl = this.state.phl;
+    const acc = this.state.acc;
+    const other_no = this.state.other_no;
     const apn = this.state.apn;
     const local_name = this.state.local_name;
     const region = this.state.region;
+    const crop = this.state.crop;
 
     const data = {
-      cguard_region,
-      cguard_n,
-      cguard_npgrl,
+      npgrl_cereals_no,
+      cguard_region,      
       gb_no,
+      phl,
+      acc,
+      other_no,
       apn,
       local_name,
-      region
+      region,
+      crop
     };    
     event.preventDefault();
     base.updateDoc('registration/'+this.state.regId, data)
@@ -99,22 +106,16 @@ class UpdateRegistration extends Component {
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">      
                   <label>
+                    NPGRL CEREALS No
+                    <input type="text" className="form-control" placeholder="NPGRL CEREALS No" value={this.state.npgrl_cereals_no} name="npgrl_cereals_no" onChange={this.handleChange} />
+                  </label>          
+                </div>
+                <div className="form-group">      
+                  <label>
                     CGUARD Region
                     <input type="text" className="form-control" placeholder="CGUARDI - XXXX" value={this.state.cguard_region} name="cguard_region" onChange={this.handleChange} />
                   </label>          
-                </div>
-                <div className="form-group">      
-                  <label>
-                    CGUARD N
-                    <input type="text" className="form-control" placeholder="CGUARDN" value={this.state.cguard_n} name="cguard_n" onChange={this.handleChange} />
-                  </label>          
-                </div>
-                <div className="form-group">      
-                  <label>
-                    CGUARD NPGRL
-                    <input type="text" className="form-control" placeholder="CGUARD NPGRL" value={this.state.cguard_npgrl} name="cguard_npgrl" onChange={this.handleChange} />
-                  </label>          
-                </div>
+                </div>         
                 <div className="form-group">      
                   <label>
                     GB No
@@ -123,8 +124,26 @@ class UpdateRegistration extends Component {
                 </div>
                 <div className="form-group">      
                   <label>
+                    PHL
+                    <input type="text" className="form-control" placeholder="PHL" value={this.state.phl} name="phl" onChange={this.handleChange} />
+                  </label>          
+                </div>
+                <div className="form-group">      
+                  <label>
+                    ACC
+                    <input type="text" className="form-control" placeholder="ACC" value={this.state.acc} name="acc" onChange={this.handleChange} />
+                  </label>          
+                </div>         
+                <div className="form-group">      
+                  <label>
                     APN
                     <input type="text" className="form-control" placeholder="APN" value={this.state.apn} name="apn" onChange={this.handleChange} />
+                  </label>          
+                </div>
+                <div className="form-group">      
+                  <label>
+                    'Other No'
+                    <input type="text" className="form-control" placeholder="Other No" value={this.state.other_no} name="other_no" onChange={this.handleChange} />
                   </label>          
                 </div>
                 <div className="form-group">      
@@ -152,7 +171,17 @@ class UpdateRegistration extends Component {
                   </label>          
                 </div>
                 <div className="form-group">      
-                  <Button type="submit" value="Submit" bsStyle="success" onClick={this.handleShow}>Submit</Button>  
+                  <label>
+                    Crop
+                    <select className="form-control" value={this.state.crop} name="crop" onChange={this.handleChange}>                
+                      <option>Corn</option>
+                      <option>Adlay</option>
+                      <option>Sorghum</option>             
+                    </select>
+                  </label>          
+                </div>
+                <div className="form-group">      
+                  <Button type="submit" value="Submit" bsStyle="success" onClick={this.handleShow}>Update</Button>  
                 </div>
               </form>  
               <Modal show={this.state.show} onHide={this.handleClose} animation={false}>
