@@ -170,7 +170,7 @@ class CreateRegistration extends Component {
             </label>          
           </div>
           <div className="form-group">      
-            <Button type="submit" value="Submit" bsStyle="success" onClick={this.handleShow}>Submit</Button>  
+            <Button type="submit" value="Submit" bsStyle="success" onClick={this.handleShow}>Create</Button>  
           </div>
         </form>  
         <Modal show={this.state.show} onHide={this.handleClose} animation={false}>

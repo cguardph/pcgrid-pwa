@@ -7,6 +7,7 @@ import {
 import Home from "./components/home";
 import Stuff from "./components/stuff";
 import Contact from "./components/contact";
+import Registration from "./components/registration/index";
 import CreateRegistration from "./components/registration/create";
 import UpdateRegistration from "./components/registration/update";
 
@@ -21,6 +22,9 @@ class Main extends Component {
               <ul className="menu-section-list" styles="{{ list-style: none; }}">
                 <li>
                   <NavLink to="/">Home</NavLink>
+                </li>
+                 <li>
+                  <NavLink to="/registration/list">Registration</NavLink>
                 </li>
                 <li>
                   <NavLink to="/stuff">Stuff</NavLink>
@@ -44,6 +48,7 @@ class Main extends Component {
               <Route exact path="/" component={Home}/>
               <Route path="/stuff" component={Stuff}/>
               <Route path="/contact" component={Contact}/>
+              <Route path="/registration/list" component={Registration}/>
               <Route path="/registration/create" component={CreateRegistration}/>
               <Route path="/registration/update/:regId" component={UpdateRegistration}/>
             </div>        

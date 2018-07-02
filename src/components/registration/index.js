@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import RegistrationList from "./list";
 
-
-// import base from '../rebase';
+import base from '../../rebase';
  
-class Home extends Component {
+class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +13,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    /*this.ref = base.bindCollection('registration', {
+    this.ref = base.bindCollection('registration', {
       context: this,
       state: 'list',
       withRefs: true,
@@ -21,14 +21,14 @@ class Home extends Component {
       then() {
         this.setState({ loading: false });
       }
-    });*/
+    });
   }
-
+  
   render() {
     return (
       <div className="container">
         <div className="row">         
-          <h2>Home</h2>                         
+          <h2>Registration</h2>                         
 
           {this.state.loading === true ? (
             <div className="loader">
@@ -37,7 +37,9 @@ class Home extends Component {
             </svg>
           </div> 
           ) : (
-            <p>Home</p>
+            <RegistrationList
+              items={this.state.list}              
+            />
           )}              
         </div>
       </div>
@@ -45,4 +47,4 @@ class Home extends Component {
   }
 }
  
-export default Home;
+export default Registration;

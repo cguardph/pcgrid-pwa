@@ -3,11 +3,11 @@ import ReactTable from "react-table";
 import "react-table/react-table.css"
 import { NavLink } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
-import base from "../rebase";
+import base from "../../rebase";
 import matchSorter from 'match-sorter'
 
 
-class List extends React.Component {
+class RegistrationList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -209,7 +209,7 @@ class List extends React.Component {
       Header: '',
       Cell:row => (
         <div>      
-          <NavLink to ={`registration/update/${row.original.id}`}>
+          <NavLink to ={`/registration/update/${row.original.id}`}>
             <Button bsStyle="warning" bsSize="small">Edit</Button>&nbsp;&nbsp;            
           </NavLink>
           <Button bsStyle="danger" bsSize="small" onClick={() => this.handleShowDelete(row.original.id)} >Delete</Button>
@@ -235,7 +235,7 @@ class List extends React.Component {
     });
     return (   
       <div className="container">      
-        <NavLink to ="registration/create">
+        <NavLink to ="/registration/create">
           <Button bsStyle="success">
             Create Registration
           </Button>
@@ -273,4 +273,4 @@ class List extends React.Component {
     );
   }
 }
-export default List;
+export default RegistrationList;
