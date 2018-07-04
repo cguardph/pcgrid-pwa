@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import Loader from "./loader";
 
 // import base from '../rebase';
  
@@ -31,11 +32,7 @@ class Home extends Component {
           <h2>Home</h2>                         
 
           {this.state.loading === true ? (
-            <div className="loader">
-            <svg viewBox="0 0 32 32" width="64" height="64">
-              <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
-            </svg>
-          </div> 
+            <Loader /> 
           ) : (
             <p>Home</p>
           )}              

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { auth, googleAuthProvider } from '../rebase';
 import GoogleButton from 'react-google-button'
-
+import { Redirect } from "react-router-dom";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -13,14 +13,17 @@ class Login extends Component {
     auth.onAuthStateChanged(user => this.setState({ user }))
   }
 
-  render() {   
-    console.log(this.state.user) 
+  render() {       
     return (
       <div className="container">
-        <GoogleButton
-          type="light"
-          onClick={( ) => auth.signInWithPopup(googleAuthProvider)}
-        />              
+        { this.state.user ? (
+                <Redirect to="/" />
+                ) : (                
+                <GoogleButton
+                  type="light"
+                  onClick={( ) => auth.signInWithPopup(googleAuthProvider)}
+                />   
+              )}        
       </div>
     );
   }

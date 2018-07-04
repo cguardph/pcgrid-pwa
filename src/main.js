@@ -8,12 +8,21 @@ import {
 import { auth, googleAuthProvider } from './rebase';
 import GoogleButton from 'react-google-button';
 import Home from "./components/home";
+import Login from "./components/login";
 import Contact from "./components/contact";
 import Registration from "./components/registration/index";
 import CreateRegistration from "./components/registration/create";
 import ViewRegistration from "./components/registration/view";
 import UpdateRegistration from "./components/registration/update";
 import Passport from "./components/passport/index";
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (    
+      rest.user
+        ? <Component {...props} />
+        : <Redirect to='/login' />
+    )} />
+  )
 
 class Main extends Component {
   constructor(props) {
@@ -24,8 +33,9 @@ class Main extends Component {
   } 
   componentDidMount ( ) {
     auth.onAuthStateChanged(user => this.setState({ user }))
-  }
-  render() {
+  }  
+
+  render() {    
     return (
       <HashRouter>
         <div>
@@ -57,19 +67,20 @@ class Main extends Component {
               <h1 className="header__title"><NavLink className="header-text" to="/">PCGRID</NavLink></h1>                   
               { this.state.user ? (
                 <NavLink to="/" onClick={( ) => auth.signOut()}>Logout</NavLink>
-                ) : (
-                <NavLink to="/" onClick={( ) => auth.signInWithPopup(googleAuthProvider)}>Login</NavLink>
+                ) : (                
+                <NavLink to="/login">Login</NavLink>
               )}              
             </header> 
 
             <div className="content">              
-              <Route exact path="/" component={Home}/>              
+              <Route exact path="/" component={Home}/>          
+              <Route path="/login" component={Login} />    
               <Route path="/contact" component={Contact}/>
-              <Route path="/registration/list" component={Registration}/>
-              <Route path="/registration/create" component={CreateRegistration}/>
-              <Route path="/registration/view/:regId" component={ViewRegistration}/>              
-              <Route path="/registration/update/:regId" component={UpdateRegistration}/>
-              <Route path="/passport/list" component={Passport}/>
+              <PrivateRoute user={this.state.user} path="/registration/list" component={Registration}/>
+              <PrivateRoute user={this.state.user} path="/registration/create" component={CreateRegistration}/>
+              <PrivateRoute user={this.state.user} path="/registration/view/:regId" component={ViewRegistration}/>              
+              <PrivateRoute user={this.state.user} path="/registration/update/:regId" component={UpdateRegistration}/>
+              <PrivateRoute user={this.state.user} path="/passport/list" component={Passport}/>
               
             </div>        
           </main>    
