@@ -2,16 +2,29 @@ import React, { Component } from "react";
 import {
   Route,
   NavLink,
-  HashRouter
+  HashRouter,
+  Redirect
 } from "react-router-dom";
+import { auth, googleAuthProvider } from './rebase';
+import GoogleButton from 'react-google-button';
 import Home from "./components/home";
-import Stuff from "./components/stuff";
 import Contact from "./components/contact";
 import Registration from "./components/registration/index";
 import CreateRegistration from "./components/registration/create";
+import ViewRegistration from "./components/registration/view";
 import UpdateRegistration from "./components/registration/update";
+import Passport from "./components/passport/index";
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: "",      
+    };
+  } 
+  componentDidMount ( ) {
+    auth.onAuthStateChanged(user => this.setState({ user }))
+  }
   render() {
     return (
       <HashRouter>
@@ -27,7 +40,7 @@ class Main extends Component {
                   <NavLink to="/registration/list">Registration</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/stuff">Stuff</NavLink>
+                  <NavLink to="/passport/list">Passport</NavLink>
                 </li>
                 <li>
                   <NavLink to="/contact">Contact</NavLink>
@@ -42,15 +55,22 @@ class Main extends Component {
                 ☰
               </button>                  
               <h1 className="header__title"><NavLink className="header-text" to="/">PCGRID</NavLink></h1>                   
+              { this.state.user ? (
+                <NavLink to="/" onClick={( ) => auth.signOut()}>Logout</NavLink>
+                ) : (
+                <NavLink to="/" onClick={( ) => auth.signInWithPopup(googleAuthProvider)}>Login</NavLink>
+              )}              
             </header> 
 
-            <div className="content">
-              <Route exact path="/" component={Home}/>
-              <Route path="/stuff" component={Stuff}/>
+            <div className="content">              
+              <Route exact path="/" component={Home}/>              
               <Route path="/contact" component={Contact}/>
               <Route path="/registration/list" component={Registration}/>
               <Route path="/registration/create" component={CreateRegistration}/>
+              <Route path="/registration/view/:regId" component={ViewRegistration}/>              
               <Route path="/registration/update/:regId" component={UpdateRegistration}/>
+              <Route path="/passport/list" component={Passport}/>
+              
             </div>        
           </main>    
           

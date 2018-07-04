@@ -208,9 +208,9 @@ class RegistrationList extends React.Component {
     {
       Header: '',
       Cell:row => (
-        <div>      
-          <NavLink to ={`/registration/update/${row.original.id}`}>
-            <Button bsStyle="warning" bsSize="small">Edit</Button>&nbsp;&nbsp;            
+        <div>                
+          <NavLink to ={`/registration/view/${row.original.id}`}>
+            <Button bsStyle="info" bsSize="small">View</Button>&nbsp;&nbsp;            
           </NavLink>
           <Button bsStyle="danger" bsSize="small" onClick={() => this.handleShowDelete(row.original.id)} >Delete</Button>
         </div>

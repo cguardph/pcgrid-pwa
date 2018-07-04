@@ -3,7 +3,9 @@ import { Modal, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 import base from "../../rebase";
- 
+
+import Loader from "../loader"; 
+
 class UpdateRegistration extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,7 @@ class UpdateRegistration extends Component {
       local_name: '',
       region: 'Region I',
       crop: 'Corn',
+      loading: true,
       show: false,
       regId: this.props.match.params.regId
     };    
@@ -96,92 +99,71 @@ class UpdateRegistration extends Component {
         <h2>Update Registration Data</h2>
 
         {this.state.loading === true ? (
-            <div className="loader">
-              <svg viewBox="0 0 32 32" width="64" height="64">
-                <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
-              </svg>
-            </div> 
+            <Loader />
           ) : (
             <div>
               <form onSubmit={this.handleSubmit}>
-                <div className="form-group">      
-                  <label>
-                    NPGRL CEREALS No
-                    <input type="text" className="form-control" placeholder="NPGRL CEREALS No" value={this.state.npgrl_cereals_no} name="npgrl_cereals_no" onChange={this.handleChange} />
-                  </label>          
+                <div className="form-group form-inline">                        
+                  <label style={{ marginRight: '10px' }}>NPGRL CEREALS No:</label>          
+                  <input type="text" className="form-control" placeholder="NPGRL CEREALS No" value={this.state.npgrl_cereals_no} name="npgrl_cereals_no" onChange={this.handleChange} />                  
                 </div>
-                <div className="form-group">      
-                  <label>
-                    CGUARD Region
-                    <input type="text" className="form-control" placeholder="CGUARDI - XXXX" value={this.state.cguard_region} name="cguard_region" onChange={this.handleChange} />
-                  </label>          
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>CGUARD Region</label>          
+                  <input type="text" className="form-control" placeholder="CGUARDI - XXXX" value={this.state.cguard_region} name="cguard_region" onChange={this.handleChange} />
                 </div>         
-                <div className="form-group">      
-                  <label>
-                    GB No
-                    <input type="text" className="form-control" placeholder="GB No" value={this.state.gb_no} name="gb_no" onChange={this.handleChange} />
-                  </label>          
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>GB No</label>          
+                  <input type="text" className="form-control" placeholder="GB No" value={this.state.gb_no} name="gb_no" onChange={this.handleChange} />
                 </div>
-                <div className="form-group">      
-                  <label>
-                    PHL
-                    <input type="text" className="form-control" placeholder="PHL" value={this.state.phl} name="phl" onChange={this.handleChange} />
-                  </label>          
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>PHL</label>          
+                  <input type="text" className="form-control" placeholder="PHL" value={this.state.phl} name="phl" onChange={this.handleChange} />
                 </div>
-                <div className="form-group">      
-                  <label>
-                    ACC
-                    <input type="text" className="form-control" placeholder="ACC" value={this.state.acc} name="acc" onChange={this.handleChange} />
-                  </label>          
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>ACC</label>          
+                  <input type="text" className="form-control" placeholder="ACC" value={this.state.acc} name="acc" onChange={this.handleChange} />
                 </div>         
-                <div className="form-group">      
-                  <label>
-                    APN
-                    <input type="text" className="form-control" placeholder="APN" value={this.state.apn} name="apn" onChange={this.handleChange} />
-                  </label>          
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>APN</label>          
+                  <input type="text" className="form-control" placeholder="APN" value={this.state.apn} name="apn" onChange={this.handleChange} />
                 </div>
-                <div className="form-group">      
-                  <label>
-                    'Other No'
-                    <input type="text" className="form-control" placeholder="Other No" value={this.state.other_no} name="other_no" onChange={this.handleChange} />
-                  </label>          
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>'Other No'</label>          
+                  <input type="text" className="form-control" placeholder="Other No" value={this.state.other_no} name="other_no" onChange={this.handleChange} />
                 </div>
-                <div className="form-group">      
-                  <label>
-                    Local Name
-                    <input type="text" className="form-control" placeholder="Local Name" value={this.state.local_name} name="local_name" onChange={this.handleChange} />
-                  </label>          
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>Local Name</label>          
+                  <input type="text" className="form-control" placeholder="Local Name" value={this.state.local_name} name="local_name" onChange={this.handleChange} />
                 </div>
-                <div className="form-group">      
-                  <label>
-                    Region
-                    <select className="form-control" value={this.state.region} name="region" onChange={this.handleChange}>
-                      <option>Region I</option>
-                      <option>Region II</option>
-                      <option>Region III</option>
-                      <option>Region IV</option>
-                      <option>Region V</option>
-                      <option>Region VI</option>
-                      <option>Region VII</option>
-                      <option>Region VIII</option>
-                      <option>Region IX</option>
-                      <option>Region XI</option>
-                      <option>Region XII</option>              
-                    </select>
-                  </label>          
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>Region</label>          
+                  <select className="form-control" value={this.state.region} name="region" onChange={this.handleChange}>
+                    <option>Region I</option>
+                    <option>Region II</option>
+                    <option>Region III</option>
+                    <option>Region IV</option>
+                    <option>Region V</option>
+                    <option>Region VI</option>
+                    <option>Region VII</option>
+                    <option>Region VIII</option>
+                    <option>Region IX</option>
+                    <option>Region XI</option>
+                    <option>Region XII</option>              
+                  </select>
                 </div>
-                <div className="form-group">      
-                  <label>
-                    Crop
-                    <select className="form-control" value={this.state.crop} name="crop" onChange={this.handleChange}>                
-                      <option>Corn</option>
-                      <option>Adlay</option>
-                      <option>Sorghum</option>             
-                    </select>
-                  </label>          
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>Crop</label>          
+                  <select className="form-control" value={this.state.crop} name="crop" onChange={this.handleChange}>                
+                    <option>Corn</option>
+                    <option>Adlay</option>
+                    <option>Sorghum</option>             
+                  </select>
                 </div>
-                <div className="form-group">      
+                <div className="form-group form-inline">      
                   <Button type="submit" value="Submit" bsStyle="success" onClick={this.handleShow}>Update</Button>  
+                  <NavLink to ={"/registration/view/"+this.state.regId}>
+                    <Button onClick={this.handleClose}>Back to view</Button>
+                  </NavLink>
                 </div>
               </form>  
               <Modal show={this.state.show} onHide={this.handleClose} animation={false}>
@@ -190,7 +172,7 @@ class UpdateRegistration extends Component {
                 </Modal.Header>                
                 <Modal.Footer>
                   <Button onClick={this.handleClose}>Update again</Button>
-                  <NavLink to="/">
+                  <NavLink to="/registration/list">
                     <Button onClick={this.handleClose}>Back to list</Button>
                   </NavLink>
                 </Modal.Footer>
