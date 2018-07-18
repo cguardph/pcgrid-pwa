@@ -11,7 +11,6 @@ class UpdateRegistration extends Component {
     super(props);
     this.state = {
       npgrl_cereals_no: '',
-      cguard_region: '',
       gb_no: '',
       phl: '',
       acc: '',
@@ -19,7 +18,10 @@ class UpdateRegistration extends Component {
       other_no: '',
       local_name: '',
       region: 'Region I',
+      date_received: '',
       crop: 'Corn',
+      genus: '',
+      species: '',
       loading: true,
       show: false,
       regId: this.props.match.params.regId
@@ -61,7 +63,6 @@ class UpdateRegistration extends Component {
 
   handleSubmit(event) {
     const npgrl_cereals_no = this.state.npgrl_cereals_no;
-    const cguard_region = this.state.cguard_region;    
     const gb_no = this.state.gb_no;
     const phl = this.state.phl;
     const acc = this.state.acc;
@@ -69,11 +70,13 @@ class UpdateRegistration extends Component {
     const apn = this.state.apn;
     const local_name = this.state.local_name;
     const region = this.state.region;
+    const date_received = this.state.date_received;
     const crop = this.state.crop;
+    const genus = this.state.genus;
+    const species = this.state.species;
 
     const data = {
-      npgrl_cereals_no,
-      cguard_region,      
+      npgrl_cereals_no,     
       gb_no,
       phl,
       acc,
@@ -81,7 +84,10 @@ class UpdateRegistration extends Component {
       apn,
       local_name,
       region,
-      crop
+      date_received,
+      crop,
+      genus,
+      species
     };    
     event.preventDefault();
     base.updateDoc('registration/'+this.state.regId, data)
@@ -103,21 +109,17 @@ class UpdateRegistration extends Component {
           ) : (
             <div>
               <form onSubmit={this.handleSubmit}>
-                <div className="form-group form-inline">                        
-                  <label style={{ marginRight: '10px' }}>NPGRL CEREALS No:</label>          
-                  <input type="text" className="form-control" placeholder="NPGRL CEREALS No" value={this.state.npgrl_cereals_no} name="npgrl_cereals_no" onChange={this.handleChange} />                  
-                </div>
-                <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>CGUARD Region</label>          
-                  <input type="text" className="form-control" placeholder="CGUARDI - XXXX" value={this.state.cguard_region} name="cguard_region" onChange={this.handleChange} />
-                </div>         
-                <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>GB No</label>          
-                  <input type="text" className="form-control" placeholder="GB No" value={this.state.gb_no} name="gb_no" onChange={this.handleChange} />
-                </div>
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>PHL</label>          
                   <input type="text" className="form-control" placeholder="PHL" value={this.state.phl} name="phl" onChange={this.handleChange} />
+                </div>
+                <div className="form-group form-inline">                        
+                  <label style={{ marginRight: '10px' }}>NPGRL CEREALS NO</label>          
+                  <input type="text" className="form-control" placeholder="NPGRL CEREALS No" value={this.state.npgrl_cereals_no} name="npgrl_cereals_no" onChange={this.handleChange} />                  
+                </div>                      
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>GB NO</label>          
+                  <input type="text" className="form-control" placeholder="GB No" value={this.state.gb_no} name="gb_no" onChange={this.handleChange} />
                 </div>
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>ACC</label>          
@@ -128,15 +130,15 @@ class UpdateRegistration extends Component {
                   <input type="text" className="form-control" placeholder="APN" value={this.state.apn} name="apn" onChange={this.handleChange} />
                 </div>
                 <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>'Other No'</label>          
+                  <label style={{ marginRight: '10px' }}>'OTHER NO'</label>          
                   <input type="text" className="form-control" placeholder="Other No" value={this.state.other_no} name="other_no" onChange={this.handleChange} />
                 </div>
                 <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>Local Name</label>          
+                  <label style={{ marginRight: '10px' }}>LOCAL NAME</label>          
                   <input type="text" className="form-control" placeholder="Local Name" value={this.state.local_name} name="local_name" onChange={this.handleChange} />
                 </div>
                 <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>Region</label>          
+                  <label style={{ marginRight: '10px' }}>PHL REGION</label>          
                   <select className="form-control" value={this.state.region} name="region" onChange={this.handleChange}>
                     <option>Region I</option>
                     <option>Region II</option>
@@ -152,12 +154,24 @@ class UpdateRegistration extends Component {
                   </select>
                 </div>
                 <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>DATE RECEIVED</label>          
+                  <input type="text" className="form-control" placeholder="Date Received" value={this.state.date_received} name="date_received" onChange={this.handleChange} />
+                </div>
+                <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>Crop</label>          
                   <select className="form-control" value={this.state.crop} name="crop" onChange={this.handleChange}>                
                     <option>Corn</option>
                     <option>Adlay</option>
                     <option>Sorghum</option>             
                   </select>
+                </div>
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>GENUS</label>          
+                  <input type="text" className="form-control" placeholder="Genus" value={this.state.genus} name="genus" onChange={this.handleChange} />
+                </div>
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>SPECIES</label>          
+                  <input type="text" className="form-control" placeholder="Species" value={this.state.species} name="species" onChange={this.handleChange} />
                 </div>
                 <div className="form-group form-inline">      
                   <Button type="submit" value="Submit" bsStyle="success" onClick={this.handleShow}>Update</Button>  

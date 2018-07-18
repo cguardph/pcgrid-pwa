@@ -10,8 +10,7 @@ class ViewRegistration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      npgrl_cereals_no: '',
-      cguard_region: '',
+      npgrl_cereals_no: '',      
       gb_no: '',
       phl: '',
       acc: '',
@@ -19,7 +18,10 @@ class ViewRegistration extends Component {
       other_no: '',
       local_name: '',
       region: 'Region I',
+      date_received: '',
       crop: 'Corn',
+      genus: '',
+      species: '',
       loading: true,
       show: false,
       regId: this.props.match.params.regId
@@ -61,7 +63,6 @@ class ViewRegistration extends Component {
 
   handleSubmit(event) {
     const npgrl_cereals_no = this.state.npgrl_cereals_no;
-    const cguard_region = this.state.cguard_region;    
     const gb_no = this.state.gb_no;
     const phl = this.state.phl;
     const acc = this.state.acc;
@@ -69,11 +70,13 @@ class ViewRegistration extends Component {
     const apn = this.state.apn;
     const local_name = this.state.local_name;
     const region = this.state.region;
+    const date_received = this.state.date_received;
     const crop = this.state.crop;
+    const genus = this.state.genus;
+    const species = this.state.species;
 
     const data = {
-      npgrl_cereals_no,
-      cguard_region,      
+      npgrl_cereals_no,     
       gb_no,
       phl,
       acc,
@@ -81,7 +84,10 @@ class ViewRegistration extends Component {
       apn,
       local_name,
       region,
-      crop
+      date_received,
+      crop,
+      genus,
+      species
     };    
     event.preventDefault();
     base.updateDoc('registration/'+this.state.regId, data)
@@ -101,16 +107,18 @@ class ViewRegistration extends Component {
             <Loader /> 
           ) : (
             <div>
-              <p>NPGRL CEREALS No: {this.state.npgrl_cereals_no}</p>
-              <p>CGUARD Region: {this.state.cguard_region}</p>
-              <p>GB No: {this.state.gb_no}</p>
               <p>PHL: {this.state.phl}</p>
+              <p>NPGRL CEREALS No: {this.state.npgrl_cereals_no}</p>              
+              <p>GB No: {this.state.gb_no}</p>
               <p>ACC: {this.state.acc}</p>
               <p>APN: {this.state.apn}</p>
               <p>Other No: {this.state.other_no}</p>
-              <p>Local Name: {this.state.local_name}</p>
-              <p>Region: {this.state.region}</p>
-              <p>Crop: {this.state.crop}</p>
+              <p>LOCAL NAME: {this.state.local_name}</p>
+              <p>PHL REGION: {this.state.region}</p>
+              <p>DATE RECEIVED: {this.state.date_received}</p>
+              <p>CROP: {this.state.crop}</p>
+              <p>GENUS: {this.state.genus}</p>
+              <p>SPECIES: {this.state.species}</p>
 
               <NavLink to ={"/registration/update/"+this.state.regId}>
                 <Button bsStyle="info" bsSize="small">Update</Button>&nbsp;&nbsp;            

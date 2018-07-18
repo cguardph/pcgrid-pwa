@@ -8,8 +8,7 @@ class CreateRegistration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      npgrl_cereals_no: '',
-      cguard_region: '',
+      npgrl_cereals_no: '',      
       gb_no: '',
       phl: '',
       acc: '',
@@ -17,6 +16,9 @@ class CreateRegistration extends Component {
       other_no: '',
       local_name: '',
       region: 'Region I',
+      date_received: '',
+      genus: '',
+      species: '',
       crop: 'Corn',
       show: false
     };    
@@ -29,8 +31,7 @@ class CreateRegistration extends Component {
 
   handleClose() {
     this.setState({ 
-      npgrl_cereals_no: '',
-      cguard_region: '',
+      npgrl_cereals_no: '',      
       gb_no: '',
       phl: '',
       acc: '',
@@ -38,7 +39,10 @@ class CreateRegistration extends Component {
       other_no: '',
       local_name: '',
       region: 'Region I',
+      date_received: '',
       crop: 'Corn',
+      genus: '',
+      species: '',
       show: false }); 
   }
 
@@ -95,26 +99,20 @@ class CreateRegistration extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">      
             <label>
-              NPGRL CEREALS No
-              <input type="text" className="form-control" placeholder="NPGRL CEREALS No" value={this.state.npgrl_cereals_no} name="npgrl_cereals_no" onChange={this.handleChange} />
-            </label>          
-          </div>
-          <div className="form-group">      
-            <label>
-              CGUARD Region
-              <input type="text" className="form-control" placeholder="CGUARDI - XXXX" value={this.state.cguard_region} name="cguard_region" onChange={this.handleChange} />
-            </label>          
-          </div>         
-          <div className="form-group">      
-            <label>
-              GB No
-              <input type="text" className="form-control" placeholder="GB No" value={this.state.gb_no} name="gb_no" onChange={this.handleChange} />
-            </label>          
-          </div>
-          <div className="form-group">      
-            <label>
               PHL
               <input type="text" className="form-control" placeholder="PHL" value={this.state.phl} name="phl" onChange={this.handleChange} />
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
+              NPGRL CEREALS NO
+              <input type="text" className="form-control" placeholder="NPGRL CEREALS No" value={this.state.npgrl_cereals_no} name="npgrl_cereals_no" onChange={this.handleChange} />
+            </label>          
+          </div>                
+          <div className="form-group">      
+            <label>
+              GB NO
+              <input type="text" className="form-control" placeholder="GB No" value={this.state.gb_no} name="gb_no" onChange={this.handleChange} />
             </label>          
           </div>
           <div className="form-group">      
@@ -131,19 +129,19 @@ class CreateRegistration extends Component {
           </div>
           <div className="form-group">      
             <label>
-              'Other No'
+              OTHER NO
               <input type="text" className="form-control" placeholder="Other No" value={this.state.other_no} name="other_no" onChange={this.handleChange} />
             </label>          
           </div>
           <div className="form-group">      
             <label>
-              Local Name
+              LOCAL NAME
               <input type="text" className="form-control" placeholder="Local Name" value={this.state.local_name} name="local_name" onChange={this.handleChange} />
             </label>          
           </div>
           <div className="form-group">      
             <label>
-              Region
+              PHL REGION
               <select className="form-control" value={this.state.region} name="region" onChange={this.handleChange}>
                 <option>Region I</option>
                 <option>Region II</option>
@@ -161,12 +159,30 @@ class CreateRegistration extends Component {
           </div>
           <div className="form-group">      
             <label>
+              DATE RECEIVED
+              <input type="text" className="form-control" placeholder="Date Received" value={this.state.date_received} name="date_received" onChange={this.handleChange} />
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
               Crop
               <select className="form-control" value={this.state.crop} name="crop" onChange={this.handleChange}>                
                 <option>Corn</option>
                 <option>Adlay</option>
                 <option>Sorghum</option>             
               </select>
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
+              GENUS
+              <input type="text" className="form-control" placeholder="Genus" value={this.state.genus} name="genus" onChange={this.handleChange} />
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
+              SPECIES
+              <input type="text" className="form-control" placeholder="Species" value={this.state.species} name="species" onChange={this.handleChange} />
             </label>          
           </div>
           <div className="form-group">      

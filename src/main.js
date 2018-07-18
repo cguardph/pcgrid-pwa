@@ -14,6 +14,10 @@ import Registration from "./components/registration/index";
 import CreateRegistration from "./components/registration/create";
 import ViewRegistration from "./components/registration/view";
 import UpdateRegistration from "./components/registration/update";
+import Inventory from "./components/inventory/index";
+import CreateInventory from "./components/inventory/create";
+import ViewInventory from "./components/inventory/view";
+import UpdateInventory from "./components/inventory/update";
 import Passport from "./components/passport/index";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -50,6 +54,9 @@ class Main extends Component {
                   <NavLink to="/registration/list">Registration</NavLink>
                 </li>
                 <li>
+                  <NavLink to="/inventory/list">Inventory</NavLink>
+                </li>
+                <li>
                   <NavLink to="/passport/list">Passport</NavLink>
                 </li>
                 <li>
@@ -66,9 +73,9 @@ class Main extends Component {
               </button>                  
               <h1 className="header__title"><NavLink className="header-text" to="/">PCGRID</NavLink></h1>                   
               { this.state.user ? (
-                <NavLink to="/" onClick={( ) => auth.signOut()}>Logout</NavLink>
+                <NavLink className="header-text" to="/" onClick={( ) => auth.signOut()}>Logout</NavLink>
                 ) : (                
-                <NavLink to="/login">Login</NavLink>
+                <NavLink className="header-text" to="/login">Login</NavLink>
               )}              
             </header> 
 
@@ -80,12 +87,14 @@ class Main extends Component {
               <PrivateRoute user={this.state.user} path="/registration/create" component={CreateRegistration}/>
               <PrivateRoute user={this.state.user} path="/registration/view/:regId" component={ViewRegistration}/>              
               <PrivateRoute user={this.state.user} path="/registration/update/:regId" component={UpdateRegistration}/>
+              <PrivateRoute user={this.state.user} path="/inventory/list" component={Inventory}/>
+              <PrivateRoute user={this.state.user} path="/inventory/create/:acc" component={CreateInventory}/>
+              <PrivateRoute user={this.state.user} path="/inventory/view/:invId" component={ViewInventory}/>              
+              <PrivateRoute user={this.state.user} path="/inventory/update/:invId" component={UpdateInventory}/>              
               <PrivateRoute user={this.state.user} path="/passport/list" component={Passport}/>
               
             </div>        
           </main>    
-          
-
         </div>
 
       </HashRouter>

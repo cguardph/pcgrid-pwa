@@ -64,7 +64,27 @@ class RegistrationList extends React.Component {
     };*/
     const columns = [
     {
-      Header: 'NPGRL CEREALS No',
+      Header: 'PHL',
+      accessor: 'phl',
+      className: 'center',
+      id: "phl",
+      // accessor: d => d.gb_no,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["phl"] }),
+      filterAll: true
+    },
+    /*{
+      Header: 'CGUARD Region',
+      accessor: 'cguard_region',
+      className: 'center',
+      id: "cguard_region",
+      // accessor: d => d.cguard_region,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["cguard_region"] }),
+      filterAll: true
+    },*/     
+    {
+      Header: 'NPGRL CEREALS NO',
       accessor: 'npgrl_cereals_no',
       className: 'center',
       id: "npgrl_cereals_no",
@@ -74,33 +94,13 @@ class RegistrationList extends React.Component {
       filterAll: true
     },
     {
-      Header: 'CGUARD Region',
-      accessor: 'cguard_region',
-      className: 'center',
-      id: "cguard_region",
-      // accessor: d => d.cguard_region,
-      filterMethod: (filter, rows) =>
-        matchSorter(rows, filter.value, { keys: ["cguard_region"] }),
-      filterAll: true
-    },     
-    {
-      Header: 'GB No',
+      Header: 'GB NO',
       accessor: 'gb_no',
       className: 'center',
       id: "gb_no",
       // accessor: d => d.gb_no,
       filterMethod: (filter, rows) =>
         matchSorter(rows, filter.value, { keys: ["gb_no"] }),
-      filterAll: true
-    },
-    {
-      Header: 'PHL',
-      accessor: 'phl',
-      className: 'center',
-      id: "phl",
-      // accessor: d => d.gb_no,
-      filterMethod: (filter, rows) =>
-        matchSorter(rows, filter.value, { keys: ["phl"] }),
       filterAll: true
     },
     {
@@ -124,7 +124,7 @@ class RegistrationList extends React.Component {
       filterAll: true
     },
     {
-      Header: 'Other No',
+      Header: 'OTHER NO',
       accessor: 'other_no',
       className: 'center',
       id: "other_no",
@@ -134,7 +134,7 @@ class RegistrationList extends React.Component {
       filterAll: true
     },      
     {
-      Header: 'Local Name',
+      Header: 'LOCAL NAME',
       accessor: 'local_name',
       className: 'center',
       id: "local_name",
@@ -144,7 +144,7 @@ class RegistrationList extends React.Component {
       filterAll: true
     },
     {
-      Header: 'Region',
+      Header: 'PHL REGION',
       accessor: 'region',
       className: 'center',
       id: "region",
@@ -179,7 +179,17 @@ class RegistrationList extends React.Component {
         </select>
     },
     {
-      Header: 'Crop',
+      Header: 'DATE RECEIVED',
+      accessor: 'date_received',
+      className: 'center',
+      id: "date_received",
+      // accessor: d => d.date_received,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["date_received"] }),
+      filterAll: true
+    },
+    {
+      Header: 'CROP',
       accessor: 'crop',
       className: 'center',
       id: "crop",
@@ -206,11 +216,34 @@ class RegistrationList extends React.Component {
         </select>
     },
     {
+      Header: 'GENUS',
+      accessor: 'genus',
+      className: 'center',
+      id: "genus",
+      // accessor: d => d.genus,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["genus"] }),
+      filterAll: true
+    },
+    {
+      Header: 'SPECIES',
+      accessor: 'species',
+      className: 'center',
+      id: "species",
+      // accessor: d => d.species,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["species"] }),
+      filterAll: true
+    },
+    {
       Header: '',
       Cell:row => (
         <div>                
-          <NavLink to ={`/registration/view/${row.original.id}`}>
+          <NavLink to={`/registration/view/${row.original.id}`}>
             <Button bsStyle="info" bsSize="small">View</Button>&nbsp;&nbsp;            
+          </NavLink>
+          <NavLink to={`/inventory/create/${row.original.phl}`} params={ {'acc': row.original.phl }}>
+            <Button bsStyle="info" bsSize="small">Create Inventory Entry</Button>&nbsp;&nbsp;            
           </NavLink>
           <Button bsStyle="danger" bsSize="small" onClick={() => this.handleShowDelete(row.original.id)} >Delete</Button>
         </div>
