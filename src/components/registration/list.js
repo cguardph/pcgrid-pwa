@@ -242,7 +242,7 @@ class RegistrationList extends React.Component {
           <NavLink to={`/registration/view/${row.original.id}`}>
             <Button bsStyle="info" bsSize="small">View</Button>&nbsp;&nbsp;            
           </NavLink>
-          <NavLink to={`/inventory/create/${row.original.phl}`} params={ {'acc': row.original.phl }}>
+          <NavLink to={`/inventory/create/${row.original.id}/${row.original.phl}`} >
             <Button bsStyle="info" bsSize="small">Create Inventory Entry</Button>&nbsp;&nbsp;            
           </NavLink>
           <Button bsStyle="danger" bsSize="small" onClick={() => this.handleShowDelete(row.original.id)} >Delete</Button>

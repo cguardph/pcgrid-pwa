@@ -8,6 +8,7 @@ class CreateInventory extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      registration_ref: this.props.match.params.regId,
       regen_ref: '',
       acc_no: this.props.match.params.acc,
       active_seed_wt: '',
@@ -35,6 +36,7 @@ class CreateInventory extends Component {
 
   handleClose() {
     this.setState({ 
+      registration_ref: this.props.match.params.regId,
       regen_ref: '',
       acc_no: this.props.match.params.acc,
       active_seed_wt: '',
@@ -68,6 +70,7 @@ class CreateInventory extends Component {
   }
 
   handleSubmit(event) {
+    const registration_ref = this.state.registration_ref;
     const regen_ref = this.state.regen_ref;
     const acc_no = this.state.acc_no;
     const active_seed_wt = this.state.active_seed_wt;
@@ -86,6 +89,7 @@ class CreateInventory extends Component {
     const base_remarks = this.state.base_remarks;
 
     const data = {
+      registration_ref,
       regen_ref,
       acc_no,
       active_seed_wt,
@@ -113,6 +117,7 @@ class CreateInventory extends Component {
   }
 
   render() {        
+    console.log(this.props);
     return (
       <div className="container">
         <h2>Create Inventory Data</h2>

@@ -8,18 +8,18 @@ class CreateRegistration extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      phl: '',
       npgrl_cereals_no: '',      
       gb_no: '',
-      phl: '',
       acc: '',
       apn: '',
       other_no: '',
       local_name: '',
       region: 'Region I',
       date_received: '',
+      crop: 'Corn',
       genus: '',
       species: '',
-      crop: 'Corn',
       show: false
     };    
 
@@ -31,9 +31,9 @@ class CreateRegistration extends Component {
 
   handleClose() {
     this.setState({ 
+      phl: '',
       npgrl_cereals_no: '',      
       gb_no: '',
-      phl: '',
       acc: '',
       apn: '',
       other_no: '',
@@ -60,28 +60,32 @@ class CreateRegistration extends Component {
   }
 
   handleSubmit(event) {
-    const npgrl_cereals_no = this.state.npgrl_cereals_no;
-    const cguard_region = this.state.cguard_region;    
-    const gb_no = this.state.gb_no;
     const phl = this.state.phl;
+    const npgrl_cereals_no = this.state.npgrl_cereals_no;    
+    const gb_no = this.state.gb_no;
     const acc = this.state.acc;
-    const other_no = this.state.other_no;
     const apn = this.state.apn;
+    const other_no = this.state.other_no;
     const local_name = this.state.local_name;
     const region = this.state.region;
+    const date_received = this.state.date_received;
     const crop = this.state.crop;
+    const genus = this.state.genus;
+    const species = this.state.species;    
 
     const data = {
-      npgrl_cereals_no,
-      cguard_region,      
-      gb_no,
       phl,
+      npgrl_cereals_no,      
+      gb_no,
       acc,
-      other_no,
       apn,
+      other_no,
       local_name,
       region,
-      crop
+      date_received,
+      crop,
+      genus,
+      species
     };    
     event.preventDefault();
     base.addToCollection('registration', data)
@@ -200,7 +204,7 @@ class CreateRegistration extends Component {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Create new</Button>
-            <NavLink to="/">
+            <NavLink to="/registration/list">
               <Button onClick={this.handleClose}>Back to list</Button>
             </NavLink>
           </Modal.Footer>
