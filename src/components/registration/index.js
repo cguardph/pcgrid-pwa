@@ -28,7 +28,7 @@ class Registration extends Component {
   
   render() {
     return (
-      <div className="container">
+      <div className="table">
         <div className="row">         
           <h2>Registration</h2>                         
 

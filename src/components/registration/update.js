@@ -17,9 +17,11 @@ class UpdateRegistration extends Component {
       apn: '',
       other_no: '',
       local_name: '',
-      region: 'Region I',
+      region: '',
+      donor_source: '',
+      country: '',
       date_received: '',
-      crop: 'Corn',
+      crop: '',
       genus: '',
       species: '',
       loading: true,
@@ -70,6 +72,8 @@ class UpdateRegistration extends Component {
     const apn = this.state.apn;
     const local_name = this.state.local_name;
     const region = this.state.region;
+    const donor_source = this.state.donor_source;
+    const country = this.state.country;
     const date_received = this.state.date_received;
     const crop = this.state.crop;
     const genus = this.state.genus;
@@ -84,6 +88,8 @@ class UpdateRegistration extends Component {
       apn,
       local_name,
       region,
+      donor_source,
+      country,
       date_received,
       crop,
       genus,
@@ -140,18 +146,31 @@ class UpdateRegistration extends Component {
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>PHL REGION</label>          
                   <select className="form-control" value={this.state.region} name="region" onChange={this.handleChange}>
+                    <option label=""></option>
                     <option>Region I</option>
                     <option>Region II</option>
                     <option>Region III</option>
-                    <option>Region IV</option>
+                    <option>Region IVA</option>
+                    <option>Region IVB</option>
                     <option>Region V</option>
                     <option>Region VI</option>
                     <option>Region VII</option>
                     <option>Region VIII</option>
                     <option>Region IX</option>
                     <option>Region XI</option>
-                    <option>Region XII</option>              
+                    <option>Region XII</option>
+                    <option>Region XIII</option>          
+                    <option>CAR</option>              
+                    <option>ARMM</option>               
                   </select>
+                </div>
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>DONOR/SOURCE</label>          
+                  <input type="text" className="form-control" placeholder="Donor/Source" value={this.state.donor_source} name="donor_source" onChange={this.handleChange} />
+                </div>
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>COUNTRY</label>          
+                  <input type="text" className="form-control" placeholder="Country" value={this.state.country} name="country" onChange={this.handleChange} />
                 </div>
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>DATE RECEIVED</label>          
@@ -160,9 +179,11 @@ class UpdateRegistration extends Component {
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>Crop</label>          
                   <select className="form-control" value={this.state.crop} name="crop" onChange={this.handleChange}>                
+                    <option label=""></option>
                     <option>Corn</option>
                     <option>Adlay</option>
                     <option>Sorghum</option>             
+                    <option>Millet</option>            
                   </select>
                 </div>
                 <div className="form-group form-inline">      

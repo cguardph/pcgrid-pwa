@@ -235,7 +235,7 @@ class CreateInventory extends Component {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Create new</Button>
-            <NavLink to="/">
+            <NavLink to="/registration/list">
               <Button onClick={this.handleClose}>Back to list</Button>
             </NavLink>
           </Modal.Footer>

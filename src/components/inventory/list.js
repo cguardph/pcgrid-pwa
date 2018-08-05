@@ -39,7 +39,7 @@ class InventoryList extends React.Component {
   };  */
 
   handleDelete(row){    
-    base.removeDoc('registration/'+row)
+    base.removeDoc('inventory/'+row)
       .then(() => {
         //document is deleted
       }).catch(err => {

@@ -15,9 +15,11 @@ class CreateRegistration extends Component {
       apn: '',
       other_no: '',
       local_name: '',
-      region: 'Region I',
+      region: '',
+      donor_source: '',
+      country: '',
       date_received: '',
-      crop: 'Corn',
+      crop: '',
       genus: '',
       species: '',
       show: false
@@ -38,9 +40,11 @@ class CreateRegistration extends Component {
       apn: '',
       other_no: '',
       local_name: '',
-      region: 'Region I',
+      region: '',
+      donor_source: '',
+      country: '',
       date_received: '',
-      crop: 'Corn',
+      crop: '',
       genus: '',
       species: '',
       show: false }); 
@@ -68,6 +72,8 @@ class CreateRegistration extends Component {
     const other_no = this.state.other_no;
     const local_name = this.state.local_name;
     const region = this.state.region;
+    const donor_source = this.state.donor_source;
+    const country = this.state.country;
     const date_received = this.state.date_received;
     const crop = this.state.crop;
     const genus = this.state.genus;
@@ -82,6 +88,8 @@ class CreateRegistration extends Component {
       other_no,
       local_name,
       region,
+      donor_source,
+      country,
       date_received,
       crop,
       genus,
@@ -147,18 +155,35 @@ class CreateRegistration extends Component {
             <label>
               PHL REGION
               <select className="form-control" value={this.state.region} name="region" onChange={this.handleChange}>
+                <option label=""></option>
                 <option>Region I</option>
                 <option>Region II</option>
                 <option>Region III</option>
-                <option>Region IV</option>
+                <option>Region IVA</option>
+                <option>Region IVB</option>
                 <option>Region V</option>
                 <option>Region VI</option>
                 <option>Region VII</option>
                 <option>Region VIII</option>
                 <option>Region IX</option>
                 <option>Region XI</option>
-                <option>Region XII</option>              
+                <option>Region XII</option>
+                <option>Region XIII</option>          
+                <option>CAR</option>              
+                <option>ARMM</option>              
               </select>
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
+              DONOR/SOURCE
+              <input type="text" className="form-control" placeholder="Donor/Source" value={this.state.donor_source} name="donor_source" onChange={this.handleChange} />
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
+              COUNTRY
+              <input type="text" className="form-control" placeholder="Country" value={this.state.country} name="country" onChange={this.handleChange} />
             </label>          
           </div>
           <div className="form-group">      
@@ -171,22 +196,33 @@ class CreateRegistration extends Component {
             <label>
               Crop
               <select className="form-control" value={this.state.crop} name="crop" onChange={this.handleChange}>                
+                <option label=""></option>
                 <option>Corn</option>
                 <option>Adlay</option>
                 <option>Sorghum</option>             
+                <option>Millet</option>             
               </select>
             </label>          
           </div>
           <div className="form-group">      
             <label>
               GENUS
-              <input type="text" className="form-control" placeholder="Genus" value={this.state.genus} name="genus" onChange={this.handleChange} />
+              <select className="form-control" value={this.state.genus} name="genus" onChange={this.handleChange}>
+
+                <option>Zea</option>
+                <option>Adlay</option>
+                <option>Sorghum</option> 
+              </select>
             </label>          
           </div>
           <div className="form-group">      
             <label>
               SPECIES
-              <input type="text" className="form-control" placeholder="Species" value={this.state.species} name="species" onChange={this.handleChange} />
+              <select type="text" className="form-control" placeholder="Species" value={this.state.species} name="species" onChange={this.handleChange}>
+                <option>mays</option>
+                <option>Adlay</option>
+                <option>Sorghum</option> 
+              </select>
             </label>          
           </div>
           <div className="form-group">      
