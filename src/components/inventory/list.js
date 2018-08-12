@@ -77,13 +77,43 @@ class InventoryList extends React.Component {
           filterAll: true
         },  
         {
-          Header: 'ACC NO',
+          Header: 'PHL NO',
           accessor: 'acc_no',
           className: 'center',
           id: "acc_no",
           // accessor: d => d.cguard_npgrl,
           filterMethod: (filter, rows) =>
             matchSorter(rows, filter.value, { keys: ["acc_no"] }),
+          filterAll: true
+        },
+        {
+          Header: 'PLANTING DATE',
+          accessor: 'planting_date',
+          className: 'center',
+          id: "planting_date",
+          // accessor: d => d.planting_date,
+          filterMethod: (filter, rows) =>
+            matchSorter(rows, filter.value, { keys: ["planting_date"] }),
+          filterAll: true
+        },
+        {
+          Header: 'HARVESTING DATE',
+          accessor: 'harvesting_date',
+          className: 'center',
+          id: "harvesting_date",
+          // accessor: d => d.harvesting_date,
+          filterMethod: (filter, rows) =>
+            matchSorter(rows, filter.value, { keys: ["harvesting_date"] }),
+          filterAll: true
+        },      
+        {
+          Header: 'PACKAGING DATE',
+          accessor: 'packaging_date',
+          className: 'center',
+          id: "packaging_date",
+          // accessor: d => d.packaging_date,
+          filterMethod: (filter, rows) =>
+            matchSorter(rows, filter.value, { keys: ["packaging_date"] }),
           filterAll: true
         },
       ]
@@ -114,36 +144,7 @@ class InventoryList extends React.Component {
             matchSorter(rows, filter.value, { keys: ["active_germination_rate"] }),
           filterAll: true
         },
-        {
-          Header: 'PLANTING DATE',
-          accessor: 'active_planting_date',
-          className: 'center',
-          id: "active_planting_date",
-          // accessor: d => d.active_planting_date,
-          filterMethod: (filter, rows) =>
-            matchSorter(rows, filter.value, { keys: ["active_planting_date"] }),
-          filterAll: true
-        },
-        {
-          Header: 'HARVESTING DATE',
-          accessor: 'active_harvesting_date',
-          className: 'center',
-          id: "active_harvesting_date",
-          // accessor: d => d.active_harvesting_date,
-          filterMethod: (filter, rows) =>
-            matchSorter(rows, filter.value, { keys: ["active_harvesting_date"] }),
-          filterAll: true
-        },      
-        {
-          Header: 'PACKAGING DATE',
-          accessor: 'active_packaging_date',
-          className: 'center',
-          id: "active_packaging_date",
-          // accessor: d => d.active_packaging_date,
-          filterMethod: (filter, rows) =>
-            matchSorter(rows, filter.value, { keys: ["active_packaging_date"] }),
-          filterAll: true
-        },
+        
         {
           Header: 'STORE LOCATION',
           accessor: 'active_store_location',
@@ -191,37 +192,7 @@ class InventoryList extends React.Component {
           filterMethod: (filter, rows) =>
             matchSorter(rows, filter.value, { keys: ["base_germination_rate"] }),
           filterAll: true
-        },
-        {
-          Header: 'PLANTING DATE',
-          accessor: 'base_planting_date',
-          className: 'center',
-          id: "base_planting_date",
-          // accessor: d => d.base_planting_date,
-          filterMethod: (filter, rows) =>
-            matchSorter(rows, filter.value, { keys: ["base_planting_date"] }),
-          filterAll: true
-        },
-        {
-          Header: 'HARVESTING DATE',
-          accessor: 'base_harvesting_date',
-          className: 'center',
-          id: "base_harvesting_date",
-          // accessor: d => d.base_harvesting_date,
-          filterMethod: (filter, rows) =>
-            matchSorter(rows, filter.value, { keys: ["base_harvesting_date"] }),
-          filterAll: true
-        },      
-        {
-          Header: 'PACKAGING DATE',
-          accessor: 'base_packaging_date',
-          className: 'center',
-          id: "base_packaging_date",
-          // accessor: d => d.base_packaging_date,
-          filterMethod: (filter, rows) =>
-            matchSorter(rows, filter.value, { keys: ["base_packaging_date"] }),
-          filterAll: true
-        },
+        },        
         {
           Header: 'STORE LOCATION',
           accessor: 'base_store_location',
@@ -274,7 +245,7 @@ class InventoryList extends React.Component {
       );
     });
     return (   
-      <div className="container">      
+      <div className="container">              
         <p>** to create inventory data go to <NavLink to="/registration/list">registration</NavLink></p>
         
         <ReactTable

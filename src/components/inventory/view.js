@@ -120,21 +120,18 @@ class ViewInventory extends Component {
           ) : (
             <div>
               <p>REGEN REF: {this.state.regen_ref}</p>
-              <p>ACC NO: {this.state.acc_no}</p> 
-              <h3>ACTIVE</h3>             
-              <p>TOTAL SEED WT: {this.state.active_seed_wt}</p>
-              <p>% GERMINATION: {this.state.active_germination_rate}</p>
+              <p>PHL NO: {this.state.acc_no}</p> 
               <p>PLANTING DATE: {this.state.active_planting_date}</p>
               <p>HARVESTING DATE: {this.state.active_harvesting_date}</p>
               <p>PACKAGING DATE: {this.state.active_packaging_date}</p>
+              <h3>ACTIVE</h3>             
+              <p>TOTAL SEED WT: {this.state.active_seed_wt}</p>
+              <p>% GERMINATION: {this.state.active_germination_rate}</p>              
               <p>STORE LOCATION: {this.state.active_store_location}</p>
               <p>REMARKS: {this.state.active_remarks}</p>
               <h3>BASE</h3>
               <p>TOTAL SEED WT: {this.state.base_seed_wt}</p>
-              <p>% GERMINATION: {this.state.base_germination_rate}</p>
-              <p>PLANTING DATE: {this.state.base_planting_date}</p>
-              <p>HARVESTING DATE: {this.state.base_harvesting_date}</p>
-              <p>PACKAGING DATE: {this.state.base_packaging_date}</p>
+              <p>% GERMINATION: {this.state.base_germination_rate}</p>              
               <p>STORE LOCATION: {this.state.base_store_location}</p>
               <p>REMARKS: {this.state.base_remarks}</p>
 

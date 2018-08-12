@@ -126,9 +126,21 @@ class UpdateInventory extends Component {
                   <input type="text" className="form-control" placeholder="Regen Ref" value={this.state.regen_ref} name="regen_ref" onChange={this.handleChange} />
                 </div>
                 <div className="form-group form-inline">                        
-                  <label style={{ marginRight: '10px' }}>ACC NO</label>          
+                  <label style={{ marginRight: '10px' }}>PHL NO</label>          
                   <input type="text" className="form-control" placeholder="Acc no" value={this.state.acc_no} name="acc_no" onChange={this.handleChange} />                  
-                </div>             
+                </div>       
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>PLANTING DATE</label>          
+                  <input type="text" className="form-control" placeholder="Planting Date" value={this.state.planting_date} name="planting_date" onChange={this.handleChange} />
+                </div>
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>HARVESTING DATE</label>          
+                  <input type="text" className="form-control" placeholder="Harvesting Date" value={this.state.harvesting_date} name="harvesting_date" onChange={this.handleChange} />
+                </div>
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>PACKAGING DATE</label>          
+                  <input type="text" className="form-control" placeholder="Local Name" value={this.state.packaging_date} name="packaging_date" onChange={this.handleChange} />
+                </div>      
                 <h3>ACTIVE</h3>         
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>TOTAL SEED WT</label>          
@@ -137,19 +149,7 @@ class UpdateInventory extends Component {
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>% GERMINATION</label>          
                   <input type="text" className="form-control" placeholder="% Germination" value={this.state.active_germination_rate} name="active_germination_rate" onChange={this.handleChange} />
-                </div>         
-                <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>PLANTING DATE</label>          
-                  <input type="text" className="form-control" placeholder="Planting Date" value={this.state.active_planting_date} name="active_planting_date" onChange={this.handleChange} />
-                </div>
-                <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>HARVESTING DATE</label>          
-                  <input type="text" className="form-control" placeholder="Harvesting Date" value={this.state.active_harvesting_date} name="active_harvesting_date" onChange={this.handleChange} />
-                </div>
-                <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>PACKAGING DATE</label>          
-                  <input type="text" className="form-control" placeholder="Local Name" value={this.state.active_packaging_date} name="active_packaging_date" onChange={this.handleChange} />
-                </div>
+                </div>                         
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>STORE LOCATION</label>          
                   <input type="text" className="form-control" placeholder="Store Location" value={this.state.active_store_location} name="active_store_location" onChange={this.handleChange} />
@@ -167,18 +167,6 @@ class UpdateInventory extends Component {
                   <label style={{ marginRight: '10px' }}>% GERMINATION</label>          
                   <input type="text" className="form-control" placeholder="% Germination" value={this.state.base_germination_rate} name="base_germination_rate" onChange={this.handleChange} />
                 </div>         
-                <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>PLANTING DATE</label>          
-                  <input type="text" className="form-control" placeholder="Planting Date" value={this.state.base_planting_date} name="base_planting_date" onChange={this.handleChange} />
-                </div>
-                <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>HARVESTING DATE</label>          
-                  <input type="text" className="form-control" placeholder="Harvesting Date" value={this.state.base_harvesting_date} name="base_harvesting_date" onChange={this.handleChange} />
-                </div>
-                <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>PACKAGING DATE</label>          
-                  <input type="text" className="form-control" placeholder="Local Name" value={this.state.base_packaging_date} name="base_packaging_date" onChange={this.handleChange} />
-                </div>
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>STORE LOCATION</label>          
                   <input type="text" className="form-control" placeholder="Store Location" value={this.state.base_store_location} name="base_store_location" onChange={this.handleChange} />

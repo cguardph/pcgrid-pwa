@@ -11,18 +11,15 @@ class CreateInventory extends Component {
       registration_ref: this.props.match.params.regId,
       regen_ref: '',
       acc_no: this.props.match.params.acc,
+      planting_date: '',
+      harvesting_date: '',
+      packaging_date: '',
       active_seed_wt: '',
       active_germination_rate: '',
-      active_planting_date: '',
-      active_harvesting_date: '',
-      active_packaging_date: '',
       active_store_location: '',
       active_remarks: '',
       base_seed_wt: '',
       base_germination_rate: '',
-      base_planting_date: '',
-      base_harvesting_date: '',
-      base_packaging_date: '',
       base_store_location: '',
       base_remarks: '',
       show: false
@@ -39,18 +36,15 @@ class CreateInventory extends Component {
       registration_ref: this.props.match.params.regId,
       regen_ref: '',
       acc_no: this.props.match.params.acc,
+      planting_date: '',
+      harvesting_date: '',
+      packaging_date: '',
       active_seed_wt: '',
       active_germination_rate: '',
-      active_planting_date: '',
-      active_harvesting_date: '',
-      active_packaging_date: '',
       active_store_location: '',
       active_remarks: '',
       base_seed_wt: '',
       base_germination_rate: '',
-      base_planting_date: '',
-      base_harvesting_date: '',
-      base_packaging_date: '',
       base_store_location: '',
       base_remarks: '',
       show: false }); 
@@ -73,18 +67,15 @@ class CreateInventory extends Component {
     const registration_ref = this.state.registration_ref;
     const regen_ref = this.state.regen_ref;
     const acc_no = this.state.acc_no;
+    const planting_date = this.state.planting_date;
+    const harvesting_date = this.state.harvesting_date;
+    const packaging_date = this.state.packaging_date;    
     const active_seed_wt = this.state.active_seed_wt;
     const active_germination_rate = this.state.active_germination_rate;
-    const active_planting_date = this.state.active_planting_date;
-    const active_harvesting_date = this.state.active_harvesting_date;
-    const active_packaging_date = this.state.active_packaging_date;    
     const active_store_location = this.state.active_store_location;
     const active_remarks = this.state.active_remarks;
     const base_seed_wt = this.state.base_seed_wt;
     const base_germination_rate = this.state.base_germination_rate;
-    const base_planting_date = this.state.base_planting_date;
-    const base_harvesting_date = this.state.base_harvesting_date;
-    const base_packaging_date = this.state.base_packaging_date;    
     const base_store_location = this.state.base_store_location;
     const base_remarks = this.state.base_remarks;
 
@@ -94,16 +85,13 @@ class CreateInventory extends Component {
       acc_no,
       active_seed_wt,
       active_germination_rate,
-      active_planting_date,
-      active_harvesting_date,
-      active_packaging_date,
+      planting_date,
+      harvesting_date,
+      packaging_date,
       active_store_location,
       active_remarks,
       base_seed_wt,
       base_germination_rate,
-      base_planting_date,
-      base_harvesting_date,
-      base_packaging_date,
       base_store_location,
       base_remarks
     };    
@@ -117,7 +105,6 @@ class CreateInventory extends Component {
   }
 
   render() {        
-    console.log(this.props);
     return (
       <div className="container">
         <h2>Create Inventory Data</h2>
@@ -130,8 +117,26 @@ class CreateInventory extends Component {
           </div>                
           <div className="form-group">      
             <label>
-              ACC NO
+              PHL NO
               <input type="text" disabled className="form-control" placeholder="Acc no" value={this.state.acc_no} name="acc_no" onChange={this.handleChange} />
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
+              PLANTING DATE
+              <input type="text" className="form-control" placeholder="Planting Date" value={this.state.planting_date} name="planting_date" onChange={this.handleChange} />
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
+              HARVESTING DATE
+              <input type="text" className="form-control" placeholder="Harvesting Date" value={this.state.harvesting_date} name="harvesting_date" onChange={this.handleChange} />
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
+              PACKAGING DATE
+              <input type="text" className="form-control" placeholder="Packaging Date" value={this.state.packaging_date} name="packaging_date" onChange={this.handleChange} />
             </label>          
           </div>
           <h3> ACTIVE </h3>
@@ -144,27 +149,9 @@ class CreateInventory extends Component {
           <div className="form-group">      
             <label>
               % GERMINATION
-              <input type="text" className="form-control" placeholder="% Germination" value={this.state.active_germination_rate} name="active_germination_ratei" onChange={this.handleChange} />
+              <input type="text" className="form-control" placeholder="% Germination" value={this.state.active_germination_rate} name="active_germination_rate" onChange={this.handleChange} />
             </label>          
           </div>         
-          <div className="form-group">      
-            <label>
-              PLANTING DATE
-              <input type="text" className="form-control" placeholder="Planting Date" value={this.state.active_planting_date} name="active_planting_date" onChange={this.handleChange} />
-            </label>          
-          </div>
-          <div className="form-group">      
-            <label>
-              HARVESTING DATE
-              <input type="text" className="form-control" placeholder="Harvesting Date" value={this.state.active_harvesting_date} name="active_harvesting_date" onChange={this.handleChange} />
-            </label>          
-          </div>
-          <div className="form-group">      
-            <label>
-              PACKAGING DATE
-              <input type="text" className="form-control" placeholder="Packaging Date" value={this.state.active_packaging_date} name="active_packaging_date" onChange={this.handleChange} />
-            </label>          
-          </div>
           <div className="form-group">      
             <label>
               STORE LOCATION
@@ -187,27 +174,9 @@ class CreateInventory extends Component {
           <div className="form-group">      
             <label>
               % GERMINATION
-              <input type="text" className="form-control" placeholder="% Germination" value={this.state.base_germination_rate} name="base_germination_ratei" onChange={this.handleChange} />
+              <input type="text" className="form-control" placeholder="% Germination" value={this.state.base_germination_rate} name="base_germination_rate" onChange={this.handleChange} />
             </label>          
-          </div>         
-          <div className="form-group">      
-            <label>
-              PLANTING DATE
-              <input type="text" className="form-control" placeholder="Planting Date" value={this.state.base_planting_date} name="base_planting_date" onChange={this.handleChange} />
-            </label>          
-          </div>
-          <div className="form-group">      
-            <label>
-              HARVESTING DATE
-              <input type="text" className="form-control" placeholder="Harvesting Date" value={this.state.base_harvesting_date} name="base_harvesting_date" onChange={this.handleChange} />
-            </label>          
-          </div>
-          <div className="form-group">      
-            <label>
-              PACKAGING DATE
-              <input type="text" className="form-control" placeholder="Packaging Date" value={this.state.base_packaging_date} name="base_packaging_date" onChange={this.handleChange} />
-            </label>          
-          </div>
+          </div>                   
           <div className="form-group">      
             <label>
               STORE LOCATION

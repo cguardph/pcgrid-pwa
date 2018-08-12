@@ -118,7 +118,7 @@ class RegistrationList extends React.Component {
   }
 
   logSelection = () => {
-    console.log("selection:", this.state.selection);
+    console.log("selection:", this.reactTable.getResolvedState().sortedData);
   };
 
   render() {
@@ -366,15 +366,17 @@ class RegistrationList extends React.Component {
         </li>*/
       );
     });
+    console.log(data)
     return (   
-      <div className="table">      
+      <div className="table">            
         <NavLink to ="/registration/create">
           <Button bsStyle="success">
             Create Registration
           </Button>
         </NavLink>
         <Button bstyle="info" onClick={logSelection}>Log Selection</Button>
-        <ReactTable         
+        <ReactTable     
+          ref={(r)=>this.reactTable=r}    
           data={data}        
           columns={columns}                
           className="-striped -highlight"
