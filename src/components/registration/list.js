@@ -3,13 +3,23 @@
 import React/*, { Component }*/ from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css"
+
+//for routing
 import { NavLink } from "react-router-dom";
+
+//for modals
 import { Modal, Button } from "react-bootstrap";
 import base from "../../rebase";
+
+//for filtering table data
 import matchSorter from 'match-sorter';
 
+//for checkbox
 import checkboxHOC from "react-table/lib/hoc/selectTable";
 import CBReactTablePagination from "../../helpers/cbreacttablepagination";
+
+//for exporting data
+import ReactExport from "react-data-export";
 
 
 const CheckboxTable = checkboxHOC(ReactTable);
