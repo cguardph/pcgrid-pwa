@@ -107,10 +107,10 @@ class ViewRegistration extends Component {
             <Loader /> 
           ) : (
             <div>
-              <p>PHL: {this.state.phl}</p>
+              <p>PHL NO: {this.state.phl}</p>
               <p>NPGRL CEREALS No: {this.state.npgrl_cereals_no}</p>              
               <p>GB No: {this.state.gb_no}</p>
-              <p>ACC: {this.state.acc}</p>
+              <p>OLD ACC NO: {this.state.acc}</p>
               <p>APN: {this.state.apn}</p>
               <p>Other No: {this.state.other_no}</p>
               <p>LOCAL NAME: {this.state.local_name}</p>

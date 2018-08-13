@@ -111,7 +111,7 @@ class CreateRegistration extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">      
             <label>
-              PHL
+              PHL NO
               <input type="text" className="form-control" placeholder="PHL" value={this.state.phl} name="phl" onChange={this.handleChange} />
             </label>          
           </div>
@@ -129,7 +129,7 @@ class CreateRegistration extends Component {
           </div>
           <div className="form-group">      
             <label>
-              ACC
+              OLD ACC NO
               <input type="text" className="form-control" placeholder="ACC" value={this.state.acc} name="acc" onChange={this.handleChange} />
             </label>          
           </div>         

@@ -116,7 +116,7 @@ class UpdateRegistration extends Component {
             <div>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>PHL</label>          
+                  <label style={{ marginRight: '10px' }}>PHL NO</label>          
                   <input type="text" className="form-control" placeholder="PHL" value={this.state.phl} name="phl" onChange={this.handleChange} />
                 </div>
                 <div className="form-group form-inline">                        
@@ -128,7 +128,7 @@ class UpdateRegistration extends Component {
                   <input type="text" className="form-control" placeholder="GB No" value={this.state.gb_no} name="gb_no" onChange={this.handleChange} />
                 </div>
                 <div className="form-group form-inline">      
-                  <label style={{ marginRight: '10px' }}>ACC</label>          
+                  <label style={{ marginRight: '10px' }}>OLD ACC NO</label>          
                   <input type="text" className="form-control" placeholder="ACC" value={this.state.acc} name="acc" onChange={this.handleChange} />
                 </div>         
                 <div className="form-group form-inline">      

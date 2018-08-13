@@ -21,8 +21,11 @@ import CBReactTablePagination from "../../helpers/cbreacttablepagination";
 //for exporting data
 import ReactExport from "react-data-export";
 
-
 const CheckboxTable = checkboxHOC(ReactTable);
+
+const ExcelFile = ReactExport.ExcelFile;
+const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 class RegistrationList extends React.Component {
   constructor(props) {
@@ -31,12 +34,23 @@ class RegistrationList extends React.Component {
       showDelete: false,
       deleteId: '',
       selection: [],
+      filteredData: '',
       selectAll: false
     };
     
+    this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleShowDelete = this.handleShowDelete.bind(this);
     this.handleCloseDelete = this.handleCloseDelete.bind(this);
+  }
+
+  handleChange(event) {    
+    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    const name = event.target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   toggleSelection = (key, shift, row) => {
@@ -128,11 +142,18 @@ class RegistrationList extends React.Component {
   }
 
   logSelection = () => {
-    console.log("selection:", this.reactTable.getResolvedState().sortedData);
+    console.log("selection: ", this.state.filteredData);
   };
 
+  fetchFilteredData = () => {
+    this.setState({
+      filteredData: this.reactTable.getResolvedState().sortedData.map(d => d._original)   
+    });     
+    console.log("function: ", this.state.filteredData)
+  }
+
   render() {
-    const { toggleSelection, toggleAll, isSelected, logSelection } = this;
+    const { toggleSelection, toggleAll, isSelected, logSelection, fetchFilteredData } = this;
     const { selectAll } = this.state.selectAll;
 
     const checkboxProps = {
@@ -157,7 +178,7 @@ class RegistrationList extends React.Component {
     };*/
     const columns = [
     {
-      Header: 'PHL',
+      Header: 'PHL NO',
       accessor: 'phl',
       className: 'center',
       id: "phl",
@@ -375,8 +396,8 @@ class RegistrationList extends React.Component {
           <span style={styles.todoItem}>{item.apn}</span>
         </li>*/
       );
-    });
-    console.log(data)
+    });   
+
     return (   
       <div className="table">            
         <NavLink to ="/registration/create">
@@ -384,6 +405,24 @@ class RegistrationList extends React.Component {
             Create Registration
           </Button>
         </NavLink>
+        <ExcelFile element={<Button bsStyle="success" onClick={fetchFilteredData}>Download Data</Button>}>
+            <ExcelSheet data={this.state.filteredData} name="Export">
+                <ExcelColumn label="PHL NO" value="phl"/>
+                <ExcelColumn label="NPGRL CEREALS NO" value="npgrl_cereals_no"/>
+                <ExcelColumn label="GB NO" value="gb_no"/>                
+                <ExcelColumn label="OLD ACC NO" value="acc"/>                
+                <ExcelColumn label="APN" value="apn"/>                
+                <ExcelColumn label="OTHER NO" value="other_no"/>                
+                <ExcelColumn label="LOCAL NAME" value="local_name"/>                
+                <ExcelColumn label="PHL REGION" value="region"/>                
+                <ExcelColumn label="DONOR/SOURCE" value="donor_source"/>                
+                <ExcelColumn label="COUNTRY" value="country"/>                
+                <ExcelColumn label="DATE RECEIVED" value="date_received"/>                
+                <ExcelColumn label="CROP" value="crop"/>                
+                <ExcelColumn label="GENUS" value="genus"/>
+                <ExcelColumn label="SPECIES" value="species"/>                                              
+            </ExcelSheet>            
+        </ExcelFile>
         <Button bstyle="info" onClick={logSelection}>Log Selection</Button>
         <ReactTable     
           ref={(r)=>this.reactTable=r}    
