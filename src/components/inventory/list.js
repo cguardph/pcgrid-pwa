@@ -1,6 +1,8 @@
 import React/*, { Component }*/ from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css"
+import dateMath from "date-arithmetic";
+
 import { NavLink } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import base from "../../rebase";
@@ -116,6 +118,14 @@ class InventoryList extends React.Component {
             matchSorter(rows, filter.value, { keys: ["packaging_date"] }),
           filterAll: true
         },
+        {
+          Header: 'YEARS IN STORAGE',          
+          // accessor: d => new Date("08/12/2016").toString(),
+          accessor: d => dateMath.diff(new Date(d.packaging_date.replace(/-/g,'/')), new Date(), "year", "asFloat").toFixed(2),
+          // accessor: d => d.packaging_date.replace(/-/g,'/'),
+          className: 'center',
+          id: 'years_in_storage',
+        },
       ]
     },
     {
@@ -217,6 +227,7 @@ class InventoryList extends React.Component {
     },
     {
       Header: '',
+      width: 300,
       Cell:row => (
         <div>                
           <NavLink to={`/inventory/view/${row.original.id}`}>
@@ -230,7 +241,11 @@ class InventoryList extends React.Component {
       filterable: false
     }
     ]
-    const data = []
+    const data = [{
+      regen_ref: "12345",
+      packaging_date: "01-15-2017",
+      active_seed_wt: 100,
+    }]
     /*var listItems = */this.props.items.map((item, index) => {
       return (
         data.push(item)        

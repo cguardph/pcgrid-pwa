@@ -2,7 +2,8 @@
 // s{...checkboxProps}
 import React/*, { Component }*/ from "react";
 import ReactTable from "react-table";
-import "react-table/react-table.css"
+import "react-table/react-table.css";
+// import dateMath from "date-arithmetic";
 
 //for routing
 import { NavLink } from "react-router-dom";
@@ -29,12 +30,12 @@ const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 class RegistrationList extends React.Component {
   constructor(props) {
-    super(props);    
+    super(props);        
     this.state = {
       showDelete: false,
       deleteId: '',
       selection: [],
-      filteredData: '',
+      filteredData: props,
       selectAll: false
     };
     
@@ -142,14 +143,20 @@ class RegistrationList extends React.Component {
   }
 
   logSelection = () => {
-    console.log("selection: ", this.state.filteredData);
+    this.setState({
+      filteredData: this.reactTable.getResolvedState().sortedData.map(d => d._original)   
+    });      
+    console.log(new Date("08-14-2014"));
+    // console.log(dateMath.diff(new Date("08-14-2014"), new Date(), "year", "asFloat"))
+    // console.log("selection: ", this.state.selection;
   };
 
   fetchFilteredData = () => {
     this.setState({
       filteredData: this.reactTable.getResolvedState().sortedData.map(d => d._original)   
-    });     
-    console.log("function: ", this.state.filteredData)
+    },
+    function() { console.log(this.state.filteredData) }
+    );     
   }
 
   render() {
@@ -251,16 +258,14 @@ class RegistrationList extends React.Component {
       Header: 'PHL REGION',
       accessor: 'region',
       className: 'center',
-      id: "region",
-      // Cell: ({ value }) => (value >= 21 ? "Yes" : "No"),
+      id: "region",     
       filterMethod: (filter, row) => {
         if (filter.value === "all") {
           return true;
         }
         if (filter.value) {      
           return row[filter.id] === filter.value;
-        }
-        return row[filter.id] < 21;
+        }        
       },
       Filter: ({ filter, onChange }) =>
         <select
@@ -320,8 +325,7 @@ class RegistrationList extends React.Component {
       Header: 'CROP',
       accessor: 'crop',
       className: 'center',
-      id: "crop",
-      // Cell: ({ value }) => (value >= 21 ? "Yes" : "No"),
+      id: "crop",      
       filterMethod: (filter, row) => {
         if (filter.value === "all") {
           return true;
@@ -329,7 +333,6 @@ class RegistrationList extends React.Component {
         if (filter.value) {      
           return row[filter.id] === filter.value;
         }
-        return row[filter.id] < 21;
       },
       Filter: ({ filter, onChange }) =>
         <select
@@ -337,8 +340,7 @@ class RegistrationList extends React.Component {
           style={{ width: "100%" }}
           value={filter ? filter.value : "all"}
         >
-          <option value="all">Show All</option>
-          <option label=""></option>          
+          <option value="all">Show All</option>                   
           <option>Corn</option>
           <option>Adlay</option>
           <option>Sorghum</option>          
@@ -383,7 +385,9 @@ class RegistrationList extends React.Component {
       filterable: false
     }
     ]
-    const data = []
+    const data = [{
+      phl: '12345',
+    }]
     /*var listItems = */this.props.items.map((item, index) => {
       return (
         data.push(item)        
