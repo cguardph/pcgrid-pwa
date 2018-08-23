@@ -284,6 +284,7 @@ class RegistrationList extends React.Component {
           <option>Region VII</option>
           <option>Region VIII</option>
           <option>Region IX</option>
+          <option>Region X</option>
           <option>Region XI</option>
           <option>Region XII</option>
           <option>Region XIII</option>          
@@ -385,9 +386,11 @@ class RegistrationList extends React.Component {
       filterable: false
     }
     ]
-    const data = [{
-      phl: '12345',
-    }]
+    const data = [
+    {
+      'phl' : '12345'
+    }
+    ]
     /*var listItems = */this.props.items.map((item, index) => {
       return (
         data.push(item)        

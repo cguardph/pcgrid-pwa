@@ -10,12 +10,12 @@ class Inventory extends Component {
     super(props);
     this.state = {
       list: [],
-      loading: true
+      loading: false
     };
   }
 
   componentDidMount() {
-    this.ref = base.bindCollection('inventory', {
+    /*this.ref = base.bindCollection('inventory', {
       context: this,
       state: 'list',
       withRefs: true,
@@ -23,7 +23,7 @@ class Inventory extends Component {
       then() {
         this.setState({ loading: false });
       }
-    });
+    });*/
   }
   
   render() {

@@ -18,6 +18,10 @@ import Inventory from "./components/inventory/index";
 import CreateInventory from "./components/inventory/create";
 import ViewInventory from "./components/inventory/view";
 import UpdateInventory from "./components/inventory/update";
+import Monitoring from "./components/monitoring/index";
+import CreateMonitoring from "./components/monitoring/create";
+import Distribution from "./components/distribution/index";
+import CreateDistribution from "./components/distribution/create";
 import Passport from "./components/passport/index";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -57,6 +61,12 @@ class Main extends Component {
                   <NavLink to="/inventory/list">Inventory</NavLink>
                 </li>
                 <li>
+                  <NavLink to="/monitoring/list">Monitoring</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/distribution/list">Distribution</NavLink>
+                </li>
+                <li>
                   <NavLink to="/passport/list">Passport</NavLink>
                 </li>
                 <li>
@@ -91,6 +101,10 @@ class Main extends Component {
               <PrivateRoute user={this.state.user} path="/inventory/create/:regId/:acc" component={CreateInventory}/>
               <PrivateRoute user={this.state.user} path="/inventory/view/:invId" component={ViewInventory}/>              
               <PrivateRoute user={this.state.user} path="/inventory/update/:invId" component={UpdateInventory}/>              
+              <PrivateRoute user={this.state.user} path="/monitoring/list" component={Monitoring}/>
+              <PrivateRoute user={this.state.user} path="/monitoring/create/:invId/:regRef" component={CreateMonitoring}/>
+              <PrivateRoute user={this.state.user} path="/distribution/list" component={Distribution}/>
+              <PrivateRoute user={this.state.user} path="/distribution/create/:invId/:regRef" component={CreateDistribution}/>
               <PrivateRoute user={this.state.user} path="/passport/list" component={Passport}/>
               
             </div>        

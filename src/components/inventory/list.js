@@ -14,12 +14,18 @@ class InventoryList extends React.Component {
     super(props);
     this.state = {
       showDelete: false,
-      deleteId: ''
+      showWithdrawal: false,
+      deleteId: '',
+      withdrawId: '',
+      withdrawRef: '',
     };
     
     this.handleDelete = this.handleDelete.bind(this);
     this.handleShowDelete = this.handleShowDelete.bind(this);
     this.handleCloseDelete = this.handleCloseDelete.bind(this);
+
+    this.handleShowWithdrawal = this.handleShowWithdrawal.bind(this);
+    this.handleCloseWithdrawal = this.handleCloseWithdrawal.bind(this);       
   }
 
   /*renderEditable = cellInfo => {
@@ -59,6 +65,18 @@ class InventoryList extends React.Component {
 
   handleCloseDelete() {
     this.setState({ showDelete: false });
+  }
+
+  handleShowWithdrawal(id, ref) {
+    this.setState({
+     showWithdrawal: true,
+     withdrawId: id,
+     withdrawRef: ref,
+   });    
+  }
+
+  handleCloseWithdrawal() {
+    this.setState({ showWithdrawal: false });
   }
 
   render() {  
@@ -233,7 +251,7 @@ class InventoryList extends React.Component {
           <NavLink to={`/inventory/view/${row.original.id}`}>
             <Button bsStyle="info" bsSize="small">View</Button>&nbsp;&nbsp;            
           </NavLink>
-          
+          <Button bsStyle="info" bsSize="small" onClick={() => this.handleShowWithdrawal(row.original.id, row.original.regen_ref)} >Withdraw</Button>&nbsp;&nbsp; 
           <Button bsStyle="danger" bsSize="small" onClick={() => this.handleShowDelete(row.original.id)} >Delete</Button>
         </div>
       ),
@@ -241,11 +259,12 @@ class InventoryList extends React.Component {
       filterable: false
     }
     ]
-    const data = [{
-      regen_ref: "12345",
-      packaging_date: "01-15-2017",
-      active_seed_wt: 100,
-    }]
+    const data = [
+    {
+      regen_ref:'12345',
+      packaging_date: '10-12-13'
+    }
+    ]
     /*var listItems = */this.props.items.map((item, index) => {
       return (
         data.push(item)        
@@ -261,7 +280,7 @@ class InventoryList extends React.Component {
     });
     return (   
       <div className="container">              
-        <p>** to create inventory data go to <NavLink to="/registration/list">registration</NavLink></p>
+        <p>** to create inventory data, go to <NavLink to="/registration/list">registration</NavLink></p>
         
         <ReactTable
           data={data}        
@@ -291,6 +310,26 @@ class InventoryList extends React.Component {
             <Button onClick={this.handleCloseDelete}>Back to list</Button>            
           </Modal.Footer>
         </Modal> 
+
+        <Modal show={this.state.showWithdrawal} onHide={this.handleCloseWithdrawal} animation={false}>
+          <Modal.Header>
+            <Modal.Title>Withdrawal</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>             
+            <p>
+              Which type of withdrawal do you wish to perform?
+            </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <NavLink to={'/monitoring/create/'+this.state.withdrawId+'/'+this.state.withdrawRef}>
+              <Button bsStyle="info" bsSize="small">Monitoring</Button>&nbsp;&nbsp;            
+            </NavLink>  
+            <NavLink to={'/distribution/create/'+this.state.withdrawId+'/'+this.state.withdrawRef}>
+              <Button bsStyle="info" bsSize="small">Distribution</Button>&nbsp;&nbsp;            
+            </NavLink>                            
+            <Button onClick={this.handleCloseWithdrawal}>Cancel</Button>            
+          </Modal.Footer>
+        </Modal>         
       </div>
     );
   }

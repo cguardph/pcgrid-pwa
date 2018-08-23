@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import RegistrationList from "./list";
+import DistributionList from "./list";
 
 import base from '../../rebase';
 
 import Loader from "../loader";
  
-class Registration extends Component {
+class Distribution extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ class Registration extends Component {
   }
 
   componentDidMount() {
-    /*this.ref = base.bindCollection('registration', {
+   /* this.ref = base.bindCollection('distribution', {
       context: this,
       state: 'list',
       withRefs: true,
@@ -28,14 +28,14 @@ class Registration extends Component {
   
   render() {
     return (
-      <div className="table">
+      <div className="container">
         <div className="row">         
-          <h2>Registration</h2>                         
+          <h2>Distribution</h2>                         
 
           {this.state.loading === true ? (
             <Loader />
           ) : (
-            <RegistrationList
+            <DistributionList
               items={this.state.list}              
             />
           )}              
@@ -45,4 +45,4 @@ class Registration extends Component {
   }
 }
  
-export default Registration;
+export default Distribution;

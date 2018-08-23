@@ -166,6 +166,7 @@ class CreateRegistration extends Component {
                 <option>Region VII</option>
                 <option>Region VIII</option>
                 <option>Region IX</option>
+                <option>Region X</option>
                 <option>Region XI</option>
                 <option>Region XII</option>
                 <option>Region XIII</option>          
