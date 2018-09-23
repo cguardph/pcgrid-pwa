@@ -98,7 +98,7 @@ class Main extends Component {
               <PrivateRoute user={this.state.user} path="/registration/view/:regId" component={ViewRegistration}/>              
               <PrivateRoute user={this.state.user} path="/registration/update/:regId" component={UpdateRegistration}/>
               <PrivateRoute user={this.state.user} path="/inventory/list" component={Inventory}/>
-              <PrivateRoute user={this.state.user} path="/inventory/create/:regId/:acc" component={CreateInventory}/>
+              <PrivateRoute user={this.state.user} path="/inventory/create" component={CreateInventory}/>
               <PrivateRoute user={this.state.user} path="/inventory/view/:invId" component={ViewInventory}/>              
               <PrivateRoute user={this.state.user} path="/inventory/update/:invId" component={UpdateInventory}/>              
               <PrivateRoute user={this.state.user} path="/monitoring/list" component={Monitoring}/>

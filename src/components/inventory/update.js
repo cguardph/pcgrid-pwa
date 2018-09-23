@@ -28,8 +28,11 @@ class UpdateInventory extends Component {
       base_remarks: '',
       loading: true,
       show: false,
-      invId: this.props.match.params.invId
-    };    
+      invId: this.props.match.params.invId,
+
+      reg: '',
+      prev_active_seed_wt: '',
+    };        
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,7 +46,10 @@ class UpdateInventory extends Component {
       withRefs: true,
       withIds: true,
       then() {        
-        this.setState({ loading: false });
+        this.setState({ 
+          loading: false,
+          prev_active_seed_wt : this.state.active_seed_wt,
+        });
       }
     });
   }
@@ -108,9 +114,31 @@ class UpdateInventory extends Component {
       }).catch(err => {
       //handle error
     });
+
+    base.get('registration/'+this.state.registration_ref, {
+      context: this,
+    }).then(data => {
+      this.setState({reg: data.total_active_wt})
+
+      base.updateDoc('registration/'+this.state.registration_ref, { total_active_wt : parseFloat(this.state.reg) + (parseFloat(this.state.active_seed_wt) - parseFloat(this.state.prev_active_seed_wt))
+      }).then(() => {
+          //document is updated          
+      }).catch(err => {
+          //handle error
+      });     
+
+      this.setState({
+        reg : parseFloat(this.state.reg) + (parseFloat(this.state.active_seed_wt) - parseFloat(this.state.prev_active_seed_wt)),
+        prev_active_seed_wt : this.state.active_seed_wt
+      });
+    });    
+    
+
+    
   }
 
   render() {
+    console.log(this.state);
     
     return (
       <div className="container">

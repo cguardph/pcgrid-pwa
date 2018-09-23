@@ -6,11 +6,11 @@ import base from "../../rebase";
  
 class CreateInventory extends Component {
   constructor(props) {
-    super(props);
+    super(props);      
     this.state = {
-      registration_ref: this.props.match.params.regId,
+      registration_ref: this.props.location.state.id,
       regen_ref: '',
-      acc_no: this.props.match.params.acc,
+      acc_no: this.props.location.state.acc,
       planting_date: '',
       harvesting_date: '',
       packaging_date: '',
@@ -22,6 +22,8 @@ class CreateInventory extends Component {
       base_germination_rate: '',
       base_store_location: '',
       base_remarks: '',
+
+      total_active_wt: this.props.location.state.total_active_wt,
       show: false
     };    
 
@@ -33,9 +35,9 @@ class CreateInventory extends Component {
 
   handleClose() {
     this.setState({ 
-      registration_ref: this.props.match.params.regId,
+      registration_ref: this.props.location.state.id,
       regen_ref: '',
-      acc_no: this.props.match.params.acc,
+      acc_no: this.props.location.state.acc,
       planting_date: '',
       harvesting_date: '',
       packaging_date: '',
@@ -46,7 +48,7 @@ class CreateInventory extends Component {
       base_seed_wt: '',
       base_germination_rate: '',
       base_store_location: '',
-      base_remarks: '',
+      base_remarks: '',      
       show: false }); 
   }
 
@@ -63,7 +65,7 @@ class CreateInventory extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit(event) {  
     const registration_ref = this.state.registration_ref;
     const regen_ref = this.state.regen_ref;
     const acc_no = this.state.acc_no;
@@ -101,13 +103,21 @@ class CreateInventory extends Component {
         //document is added to the collection
       }).catch(err => {
       //handle error
+    });   
+
+    base.updateDoc('registration/'+this.state.registration_ref, { total_active_wt: parseFloat(this.state.total_active_wt) + parseFloat(this.state.active_seed_wt) })
+    .then(() => {
+      
+    }).catch(err => {
+      //handle error
     });
+    this.state.total_active_wt = parseFloat(this.state.total_active_wt) + parseFloat(this.state.active_seed_wt);
   }
 
   render() {        
     return (
       <div className="container">
-        <h2>Create Inventory Data</h2>
+        <h2>Create Inventory</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">      
             <label>

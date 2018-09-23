@@ -24,6 +24,9 @@ class UpdateRegistration extends Component {
       crop: '',
       genus: '',
       species: '',
+      total_active_wt: '',
+      total_base_wt: '',
+      conservation_stat: '',
       loading: true,
       show: false,
       regId: this.props.match.params.regId
@@ -78,6 +81,9 @@ class UpdateRegistration extends Component {
     const crop = this.state.crop;
     const genus = this.state.genus;
     const species = this.state.species;
+    const total_active_wt = this.state.total_active_wt;
+    const total_base_wt = this.state.total_base_wt;
+    const conservation_stat = this.state.conservation_stat;
 
     const data = {
       npgrl_cereals_no,     
@@ -93,7 +99,10 @@ class UpdateRegistration extends Component {
       date_received,
       crop,
       genus,
-      species
+      species,
+      total_active_wt,
+      total_base_wt,
+      conservation_stat,
     };    
     event.preventDefault();
     base.updateDoc('registration/'+this.state.regId, data)
@@ -194,6 +203,22 @@ class UpdateRegistration extends Component {
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>SPECIES</label>          
                   <input type="text" className="form-control" placeholder="Species" value={this.state.species} name="species" onChange={this.handleChange} />
+                </div>
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>TOTAL ACTIVE WT</label>          
+                  <input type="text"  className="form-control" placeholder="Total Active Wt" value={this.state.total_active_wt} name="total_active_wt" onChange={this.handleChange} />
+                </div>
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>TOTAL BASE WT</label>          
+                  <input type="text" disabled className="form-control" placeholder="Total Base Wt" value={this.state.total_base_wt} name="total_base_wt" onChange={this.handleChange} />
+                </div>
+                <div className="form-group form-inline">      
+                  <label style={{ marginRight: '10px' }}>CONSERVATION STATUS</label>          
+                  <select className="form-control" value={this.state.conservation_stat} name="conservation_stat" onChange={this.handleChange}>                
+                    <option label=""></option>
+                    <option>LIVE</option>
+                    <option>DEAD</option>            
+                  </select>
                 </div>
                 <div className="form-group form-inline">      
                   <Button type="submit" value="Submit" bsStyle="success" onClick={this.handleShow}>Update</Button>  

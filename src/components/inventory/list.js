@@ -8,6 +8,12 @@ import { Modal, Button } from "react-bootstrap";
 import base from "../../rebase";
 import matchSorter from 'match-sorter'
 
+//for exporting data
+import ReactExport from "react-data-export";
+
+const ExcelFile = ReactExport.ExcelFile;
+const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 class InventoryList extends React.Component {
   constructor(props) {
@@ -16,6 +22,9 @@ class InventoryList extends React.Component {
       showDelete: false,
       showWithdrawal: false,
       deleteId: '',
+      delete_registration_ref: '',
+      delete_active_seed_wt: '',
+      reg: '',
       withdrawId: '',
       withdrawRef: '',
     };
@@ -46,20 +55,36 @@ class InventoryList extends React.Component {
     );
   };  */
 
-  handleDelete(row){    
+  handleDelete(row, registration_ref, active_wt){        
+    base.get('registration/'+registration_ref, {
+      context: this,          
+    }).then(data => {
+      this.setState({reg: data.total_active_wt})
+      base.updateDoc('registration/'+registration_ref, { total_active_wt: parseFloat(this.state.reg) - parseFloat(active_wt) 
+      }).then(() => {
+        //document is updated
+    }).catch(err => {
+      //handle error
+    });   
+
     base.removeDoc('inventory/'+row)
       .then(() => {
         //document is deleted
       }).catch(err => {
       //handle error
     });
+
     this.handleCloseDelete();
+
+    })      
   }
 
-  handleShowDelete(row) {
+  handleShowDelete(row, registration_ref, active_wt) {
     this.setState({
      showDelete: true,
-     deleteId: row
+     deleteId: row,
+     delete_registration_ref: registration_ref,
+     delete_active_seed_wt: active_wt,
    });    
   }
 
@@ -79,7 +104,16 @@ class InventoryList extends React.Component {
     this.setState({ showWithdrawal: false });
   }
 
+  fetchFilteredData = () => {
+    this.setState({
+      filteredData: this.reactTable.getResolvedState().sortedData.map(d => d._original)   
+    },
+    function() { console.log(this.state.filteredData) }
+    );     
+  }
+
   render() {  
+    const { fetchFilteredData } = this;
     /*var styles = {      
     };*/
     const columns = [
@@ -139,10 +173,13 @@ class InventoryList extends React.Component {
         {
           Header: 'YEARS IN STORAGE',          
           // accessor: d => new Date("08/12/2016").toString(),
-          accessor: d => dateMath.diff(new Date(d.packaging_date.replace(/-/g,'/')), new Date(), "year", "asFloat").toFixed(2),
+          accessor: d => dateMath.diff(new Date(d.packaging_date.replace(/-/g,'/')), new Date(), "year", "asFloat").toFixed(1),          
           // accessor: d => d.packaging_date.replace(/-/g,'/'),
           className: 'center',
-          id: 'years_in_storage',
+          id: "years_in_storage",
+          filterMethod: (filter, rows) =>
+            matchSorter(rows, filter.value, { keys: ["years_in_storage"] }),
+          filterAll: true
         },
       ]
     },
@@ -153,7 +190,7 @@ class InventoryList extends React.Component {
       },
       columns: [
         {
-          Header: 'TOTAL SEED WT',
+          Header: 'SEED WT',
           accessor: 'active_seed_wt',
           className: 'center',
           id: "active_seed_wt",
@@ -202,7 +239,7 @@ class InventoryList extends React.Component {
       },
       columns: [
         {
-          Header: 'TOTAL SEED WT',
+          Header: 'SEED WT',
           accessor: 'base_seed_wt',
           className: 'center',
           id: "base_seed_wt",
@@ -252,17 +289,16 @@ class InventoryList extends React.Component {
             <Button bsStyle="info" bsSize="small">View</Button>&nbsp;&nbsp;            
           </NavLink>
           <Button bsStyle="info" bsSize="small" onClick={() => this.handleShowWithdrawal(row.original.id, row.original.regen_ref)} >Withdraw</Button>&nbsp;&nbsp; 
-          <Button bsStyle="danger" bsSize="small" onClick={() => this.handleShowDelete(row.original.id)} >Delete</Button>
+          <Button bsStyle="danger" bsSize="small" onClick={() => this.handleShowDelete(row.original.id, row.original.registration_ref, row.original.active_seed_wt)} >Delete</Button>
         </div>
       ),
       className: 'center',
       filterable: false
-    }
+    } 
     ]
-    const data = [
-    {
-      regen_ref:'12345',
-      packaging_date: '10-12-13'
+    const data = [{
+      regen_ref: '1231',
+      packaging_date: '01-01-2016',      
     }
     ]
     /*var listItems = */this.props.items.map((item, index) => {
@@ -282,7 +318,26 @@ class InventoryList extends React.Component {
       <div className="container">              
         <p>** to create inventory data, go to <NavLink to="/registration/list">registration</NavLink></p>
         
+        <ExcelFile element={<Button bsStyle="success" onClick={fetchFilteredData}>Download Data</Button>}>
+            <ExcelSheet data={this.state.filteredData} name="Export">
+                <ExcelColumn label="REGEN REF" value="regen_ref"/>
+                <ExcelColumn label="PLANTING DATE" value="planting_date"/>
+                <ExcelColumn label="HARVESTING DATE" value="harvesting_date"/>                
+                <ExcelColumn label="PACKAGING DATE" value="packaging_date"/>                
+                <ExcelColumn label="YEARS IN STORAGEE" value="years_in_storage"/>                
+                <ExcelColumn label="TOTAL SEED WT" value="active_seed_wt"/>                
+                <ExcelColumn label="GERMINATION" value="active_germination_rate"/>                
+                <ExcelColumn label="STORE LOCATION" value="active_store_location"/>                
+                <ExcelColumn label="REMARKS" value="active_remarks"/>                
+                <ExcelColumn label="TOTAL SEED WT" value="base_seed_wt"/>                
+                <ExcelColumn label="GERMINATION" value="base_germination_rate"/>                
+                <ExcelColumn label="STORE LOCATION" value="base_store_location"/>                
+                <ExcelColumn label="REMARKS" value="base_remarks"/>                                              
+            </ExcelSheet>            
+        </ExcelFile>
+
         <ReactTable
+          ref={(r)=>this.reactTable=r}
           data={data}        
           columns={columns}
           pageSize={10}          
@@ -306,7 +361,7 @@ class InventoryList extends React.Component {
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => this.handleDelete(this.state.deleteId)}>Delete</Button>          
+            <Button onClick={() => this.handleDelete(this.state.deleteId, this.state.delete_registration_ref, this.state.delete_active_seed_wt)}>Delete</Button>          
             <Button onClick={this.handleCloseDelete}>Back to list</Button>            
           </Modal.Footer>
         </Modal> 

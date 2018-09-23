@@ -22,6 +22,9 @@ class ViewRegistration extends Component {
       crop: '',
       genus: '',
       species: '',
+      total_active_wt: '',
+      total_base_wt: '',
+      conservation_stat: '',
       loading: true,
       show: false,
       regId: this.props.match.params.regId
@@ -74,6 +77,9 @@ class ViewRegistration extends Component {
     const crop = this.state.crop;
     const genus = this.state.genus;
     const species = this.state.species;
+    const total_active_wt = this.state.total_active_wt;
+    const total_base_wt = this.state.total_base_wt;
+    const conservation_stat = this.state.conservation_stat;
 
     const data = {
       npgrl_cereals_no,     
@@ -87,7 +93,10 @@ class ViewRegistration extends Component {
       date_received,
       crop,
       genus,
-      species
+      species,
+      total_active_wt,
+      total_base_wt,
+      conservation_stat,
     };    
     event.preventDefault();
     base.updateDoc('registration/'+this.state.regId, data)
@@ -119,6 +128,9 @@ class ViewRegistration extends Component {
               <p>CROP: {this.state.crop}</p>
               <p>GENUS: {this.state.genus}</p>
               <p>SPECIES: {this.state.species}</p>
+              <p>TOTAL ACTIVE WT: {this.state.total_active_wt}</p>
+              <p>TOTAL BASE WT: {this.state.total_base_wt}</p>
+              <p>CONSERVATION STATUS: {this.state.conservation_stat}</p>
 
               <NavLink to ={"/registration/update/"+this.state.regId}>
                 <Button bsStyle="info" bsSize="small">Update</Button>&nbsp;&nbsp;            

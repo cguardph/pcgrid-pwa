@@ -22,6 +22,9 @@ class CreateRegistration extends Component {
       crop: '',
       genus: '',
       species: '',
+      total_active_wt: 0,
+      total_base_wt: 0,
+      conservation_stat: '',
       show: false
     };    
 
@@ -47,6 +50,9 @@ class CreateRegistration extends Component {
       crop: '',
       genus: '',
       species: '',
+      total_active_wt: 0,
+      total_base_wt: 0,
+      conservation_stat: '',
       show: false }); 
   }
 
@@ -78,6 +84,9 @@ class CreateRegistration extends Component {
     const crop = this.state.crop;
     const genus = this.state.genus;
     const species = this.state.species;    
+    const total_active_wt = this.state.total_active_wt;    
+    const total_base_wt = this.state.total_base_wt;    
+    const conservation_stat = this.state.conservation_stat;    
 
     const data = {
       phl,
@@ -93,6 +102,9 @@ class CreateRegistration extends Component {
       date_received,
       crop,
       genus,
+      total_active_wt,
+      total_base_wt,
+      conservation_stat,
       species
     };    
     event.preventDefault();
@@ -195,7 +207,7 @@ class CreateRegistration extends Component {
           </div>
           <div className="form-group">      
             <label>
-              Crop
+              CROP
               <select className="form-control" value={this.state.crop} name="crop" onChange={this.handleChange}>                
                 <option label=""></option>
                 <option>Corn</option>
@@ -209,7 +221,6 @@ class CreateRegistration extends Component {
             <label>
               GENUS
               <select className="form-control" value={this.state.genus} name="genus" onChange={this.handleChange}>
-
                 <option>Zea</option>
                 <option>Adlay</option>
                 <option>Sorghum</option> 
@@ -223,6 +234,27 @@ class CreateRegistration extends Component {
                 <option>mays</option>
                 <option>Adlay</option>
                 <option>Sorghum</option> 
+              </select>
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
+              TOTAL ACTIVE WT
+              <input type="text" disabled className="form-control" placeholder="Total Active Wt" value={this.state.total_active_wt} name="total_active_wt" onChange={this.handleChange} />
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
+              TOTAL BASE WT
+              <input type="text" disabled className="form-control" placeholder="Total Base Wt" value={this.state.total_base_wt} name="total_base_wt" onChange={this.handleChange} />
+            </label>          
+          </div>
+          <div className="form-group">      
+            <label>
+              CONSERVATION STATUS
+              <select type="text" className="form-control" placeholder="Conservation Status" value={this.state.conservation_stat} name="conservation_stat" onChange={this.handleChange}>
+                <option>LIVE</option>
+                <option>DEAD</option>                
               </select>
             </label>          
           </div>

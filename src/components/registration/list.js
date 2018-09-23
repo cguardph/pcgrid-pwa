@@ -160,6 +160,19 @@ class RegistrationList extends React.Component {
   }
 
   render() {
+    /*
+    //put 0 as value to total active weight and total base weight for all the documents in registration
+    base.get('registration', {
+      withIds: true,
+      context: this,          
+    }).then(data => {      
+      data.map((r) =>
+        //CAUTION: do not uncomment next line without understanding the code
+        //base.updateDoc('registration/'+r.id, { total_active_wt: 0, total_base_wt : 0 
+        })
+        )
+    });   */
+
     const { toggleSelection, toggleAll, isSelected, logSelection, fetchFilteredData } = this;
     const { selectAll } = this.state.selectAll;
 
@@ -184,6 +197,16 @@ class RegistrationList extends React.Component {
     /*var styles = {      
     };*/
     const columns = [
+    /*{
+      Header: 'ID',
+      accessor: 'id',
+      className: 'center',
+      id: "id",
+      // accessor: d => d.gb_no,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["id"] }),
+      filterAll: true
+    }, */
     {
       Header: 'PHL NO',
       accessor: 'phl',
@@ -369,6 +392,50 @@ class RegistrationList extends React.Component {
       filterAll: true
     },
     {
+      Header: 'TOTAL ACTIVE WT',
+      accessor: 'total_active_wt',
+      className: 'center',
+      id: 'total_active_wt',
+      // accessor: d => d.total_active_wt,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["total_active_wt"] }),
+      filterAll: true
+    },
+    {
+      Header: 'TOTAL BASE WT',
+      accessor: 'total_base_wt',
+      className: 'center',
+      id: 'total_base_wt',
+      // accessor: d => d.total_base_wt,
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["total_base_wt"] }),
+      filterAll: true
+    },
+    {
+      Header: 'CONSERVATION STATUS',
+      accessor: 'conservation_stat',
+      className: 'center',
+      id: "conservation_stat",      
+      filterMethod: (filter, row) => {
+        if (filter.value === "all") {
+          return true;
+        }
+        if (filter.value) {      
+          return row[filter.id] === filter.value;
+        }
+      },
+      Filter: ({ filter, onChange }) =>
+        <select
+          onChange={event => onChange(event.target.value)}
+          style={{ width: "100%" }}
+          value={filter ? filter.value : "all"}
+        >
+          <option value="all">Show All</option>                   
+          <option>LIVE</option>                  
+          <option>DEAD</option>
+        </select>
+    },
+    {
       Header: '',
       width: 300,
       Cell:row => (
@@ -376,8 +443,17 @@ class RegistrationList extends React.Component {
           <NavLink to={`/registration/view/${row.original.id}`}>
             <Button bsStyle="info" bsSize="small">View</Button>&nbsp;&nbsp;            
           </NavLink>
-          <NavLink to={`/inventory/create/${row.original.id}/${row.original.phl}`} >
-            <Button bsStyle="info" bsSize="small">Create Inventory Entry</Button>&nbsp;&nbsp;            
+          
+          <NavLink to= {{
+            pathname: '/inventory/create',
+            state: {
+              id : row.original.id,
+              acc : row.original.acc,
+              total_active_wt : row.original.total_active_wt,
+              total_base_wt : row.original.total_base_wt,
+            }
+          }} >
+            <Button bsStyle="info" bsSize="small">Create Inventory Entry</Button>&nbsp;&nbsp;                     
           </NavLink>
           <Button bsStyle="danger" bsSize="small" onClick={() => this.handleShowDelete(row.original.id)} >Delete</Button>
         </div>
@@ -386,11 +462,11 @@ class RegistrationList extends React.Component {
       filterable: false
     }
     ]
-    const data = [
-    {
-      'phl' : '12345'
-    }
-    ]
+    const data = [{
+      id: '2345',
+      phl: '12345',
+      total_base_wt: 0,
+    }]
     /*var listItems = */this.props.items.map((item, index) => {
       return (
         data.push(item)        
@@ -428,6 +504,9 @@ class RegistrationList extends React.Component {
                 <ExcelColumn label="CROP" value="crop"/>                
                 <ExcelColumn label="GENUS" value="genus"/>
                 <ExcelColumn label="SPECIES" value="species"/>                                              
+                <ExcelColumn label="TOTAL ACTIVE WT" value="total_active_wt"/>                                              
+                <ExcelColumn label="TOTAL BASE WT" value="total_base_wt"/>                                              
+                <ExcelColumn label="CONSERVATION STATUS" value="conservation_stat"/>                                              
             </ExcelSheet>            
         </ExcelFile>
         <Button bstyle="info" onClick={logSelection}>Log Selection</Button>

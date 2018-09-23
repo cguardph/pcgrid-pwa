@@ -10,12 +10,12 @@ class Registration extends Component {
     super(props);
     this.state = {
       list: [],
-      loading: false
+      loading: true
     };
   }
 
   componentDidMount() {
-    /*this.ref = base.bindCollection('registration', {
+    this.ref = base.bindCollection('registration', {
       context: this,
       state: 'list',
       withRefs: true,
@@ -23,7 +23,7 @@ class Registration extends Component {
       then() {
         this.setState({ loading: false });
       }
-    });*/
+    });
   }
   
   render() {
