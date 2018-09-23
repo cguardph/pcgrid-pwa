@@ -14,16 +14,17 @@ class CreateInventory extends Component {
       planting_date: '',
       harvesting_date: '',
       packaging_date: '',
-      active_seed_wt: '',
+      active_seed_wt: 0,
       active_germination_rate: '',
       active_store_location: '',
       active_remarks: '',
-      base_seed_wt: '',
+      base_seed_wt: 0,
       base_germination_rate: '',
       base_store_location: '',
       base_remarks: '',
 
       total_active_wt: this.props.location.state.total_active_wt,
+      total_base_wt: this.props.location.state.total_base_wt,
       show: false
     };    
 
@@ -105,13 +106,16 @@ class CreateInventory extends Component {
       //handle error
     });   
 
-    base.updateDoc('registration/'+this.state.registration_ref, { total_active_wt: parseFloat(this.state.total_active_wt) + parseFloat(this.state.active_seed_wt) })
-    .then(() => {
+    base.updateDoc('registration/'+this.state.registration_ref, { 
+      total_active_wt: parseFloat(this.state.total_active_wt) + parseFloat(this.state.active_seed_wt),
+      total_base_wt: parseFloat(this.state.total_base_wt) + parseFloat(this.state.base_seed_wt), 
+    }).then(() => {
       
     }).catch(err => {
       //handle error
     });
     this.state.total_active_wt = parseFloat(this.state.total_active_wt) + parseFloat(this.state.active_seed_wt);
+    this.state.total_base_wt = parseFloat(this.state.total_base_wt) + parseFloat(this.state.base_seed_wt);
   }
 
   render() {        

@@ -22,11 +22,14 @@ class InventoryList extends React.Component {
       showDelete: false,
       showWithdrawal: false,
       deleteId: '',
-      delete_registration_ref: '',
-      delete_active_seed_wt: '',
-      reg: '',
+      delete_registration_ref: '',    
       withdrawId: '',
       withdrawRef: '',
+
+      delete_active_seed_wt: '',
+      delete_base_seed_wt: '',
+      reg_total_active_wt: '',
+      reg_total_base_wt: '',
     };
     
     this.handleDelete = this.handleDelete.bind(this);
@@ -55,12 +58,18 @@ class InventoryList extends React.Component {
     );
   };  */
 
-  handleDelete(row, registration_ref, active_wt){        
+  handleDelete(row, registration_ref, active_wt, base_wt){        
     base.get('registration/'+registration_ref, {
       context: this,          
     }).then(data => {
-      this.setState({reg: data.total_active_wt})
-      base.updateDoc('registration/'+registration_ref, { total_active_wt: parseFloat(this.state.reg) - parseFloat(active_wt) 
+      this.setState({
+        reg_total_active_wt: data.total_active_wt,
+        reg_total_base_wt: data.total_base_wt
+      });
+
+      base.updateDoc('registration/'+registration_ref, { 
+        total_active_wt: parseFloat(this.state.reg_total_active_wt) - parseFloat(active_wt),
+        total_base_wt: parseFloat(this.state.reg_total_base_wt) - parseFloat(base_wt) 
       }).then(() => {
         //document is updated
     }).catch(err => {
@@ -79,12 +88,13 @@ class InventoryList extends React.Component {
     })      
   }
 
-  handleShowDelete(row, registration_ref, active_wt) {
+  handleShowDelete(row, registration_ref, active_wt, base_wt) {
     this.setState({
      showDelete: true,
      deleteId: row,
      delete_registration_ref: registration_ref,
      delete_active_seed_wt: active_wt,
+     delete_base_seed_wt: base_wt,
    });    
   }
 
@@ -289,7 +299,7 @@ class InventoryList extends React.Component {
             <Button bsStyle="info" bsSize="small">View</Button>&nbsp;&nbsp;            
           </NavLink>
           <Button bsStyle="info" bsSize="small" onClick={() => this.handleShowWithdrawal(row.original.id, row.original.regen_ref)} >Withdraw</Button>&nbsp;&nbsp; 
-          <Button bsStyle="danger" bsSize="small" onClick={() => this.handleShowDelete(row.original.id, row.original.registration_ref, row.original.active_seed_wt)} >Delete</Button>
+          <Button bsStyle="danger" bsSize="small" onClick={() => this.handleShowDelete(row.original.id, row.original.registration_ref, row.original.active_seed_wt, row.original.base_seed_wt)} >Delete</Button>
         </div>
       ),
       className: 'center',
@@ -361,7 +371,7 @@ class InventoryList extends React.Component {
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => this.handleDelete(this.state.deleteId, this.state.delete_registration_ref, this.state.delete_active_seed_wt)}>Delete</Button>          
+            <Button onClick={() => this.handleDelete(this.state.deleteId, this.state.delete_registration_ref, this.state.delete_active_seed_wt, this.state.delete_base_seed_wt)}>Delete</Button>          
             <Button onClick={this.handleCloseDelete}>Back to list</Button>            
           </Modal.Footer>
         </Modal> 

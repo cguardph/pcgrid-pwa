@@ -210,7 +210,7 @@ class UpdateRegistration extends Component {
                 </div>
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>TOTAL BASE WT</label>          
-                  <input type="text" disabled className="form-control" placeholder="Total Base Wt" value={this.state.total_base_wt} name="total_base_wt" onChange={this.handleChange} />
+                  <input type="text" className="form-control" placeholder="Total Base Wt" value={this.state.total_base_wt} name="total_base_wt" onChange={this.handleChange} />
                 </div>
                 <div className="form-group form-inline">      
                   <label style={{ marginRight: '10px' }}>CONSERVATION STATUS</label>          

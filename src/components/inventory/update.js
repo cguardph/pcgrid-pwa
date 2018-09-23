@@ -30,8 +30,10 @@ class UpdateInventory extends Component {
       show: false,
       invId: this.props.match.params.invId,
 
-      reg: '',
+      reg_total_active_wt: '',
+      reg_total_base_wt: '',
       prev_active_seed_wt: '',
+      prev_base_seed_wt: '',
     };        
 
     this.handleChange = this.handleChange.bind(this);
@@ -49,6 +51,7 @@ class UpdateInventory extends Component {
         this.setState({ 
           loading: false,
           prev_active_seed_wt : this.state.active_seed_wt,
+          prev_base_seed_wt : this.state.base_seed_wt,
         });
       }
     });
@@ -118,9 +121,14 @@ class UpdateInventory extends Component {
     base.get('registration/'+this.state.registration_ref, {
       context: this,
     }).then(data => {
-      this.setState({reg: data.total_active_wt})
+      this.setState({
+        reg_total_active_wt: data.total_active_wt,
+        reg_total_base_wt: data.total_base_wt
+      })
 
-      base.updateDoc('registration/'+this.state.registration_ref, { total_active_wt : parseFloat(this.state.reg) + (parseFloat(this.state.active_seed_wt) - parseFloat(this.state.prev_active_seed_wt))
+      base.updateDoc('registration/'+this.state.registration_ref, { 
+        total_active_wt : parseFloat(this.state.reg_total_active_wt) + (parseFloat(this.state.active_seed_wt) - parseFloat(this.state.prev_active_seed_wt)),
+        total_base_wt : parseFloat(this.state.reg_total_base_wt) + (parseFloat(this.state.base_seed_wt) - parseFloat(this.state.prev_base_seed_wt))
       }).then(() => {
           //document is updated          
       }).catch(err => {
@@ -128,8 +136,10 @@ class UpdateInventory extends Component {
       });     
 
       this.setState({
-        reg : parseFloat(this.state.reg) + (parseFloat(this.state.active_seed_wt) - parseFloat(this.state.prev_active_seed_wt)),
-        prev_active_seed_wt : this.state.active_seed_wt
+        reg_total_active_wt : parseFloat(this.state.reg_total_active_wt) + (parseFloat(this.state.active_seed_wt) - parseFloat(this.state.prev_active_seed_wt)),
+        reg_total_base_wt : parseFloat(this.state.reg_total_base_wt) + (parseFloat(this.state.base_seed_wt) - parseFloat(this.state.prev_base_seed_wt)),
+        prev_active_seed_wt : this.state.active_seed_wt,
+        prev_base_seed_wt : this.state.base_seed_wt,
       });
     });    
     
@@ -137,9 +147,7 @@ class UpdateInventory extends Component {
     
   }
 
-  render() {
-    console.log(this.state);
-    
+  render() {    
     return (
       <div className="container">
         <h2>Update Inventory Data</h2>
