@@ -440,8 +440,13 @@ class RegistrationList extends React.Component {
       width: 300,
       Cell:row => (
         <div>                
-          <NavLink to={`/registration/view/${row.original.id}`}>
-            <Button bsStyle="info" bsSize="small">View</Button>&nbsp;&nbsp;            
+          <NavLink to= {{
+            pathname: '/registration/view',
+            state: {
+              id: row.original.id,
+            }
+          }} >
+            <Button bsStyle="info" bsSize="small">View</Button>&nbsp;&nbsp;                      
           </NavLink>
           
           <NavLink to= {{

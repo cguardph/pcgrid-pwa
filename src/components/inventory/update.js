@@ -28,7 +28,7 @@ class UpdateInventory extends Component {
       base_remarks: '',
       loading: true,
       show: false,
-      invId: this.props.match.params.invId,
+      invId: this.props.location.state.id,
 
       reg_total_active_wt: '',
       reg_total_base_wt: '',

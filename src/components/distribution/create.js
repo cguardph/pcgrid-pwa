@@ -8,8 +8,8 @@ class CreateDistribution extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inventory_ref: this.props.match.params.invId,
-      regen_ref: this.props.match.params.regRef,
+      inventory_ref: this.props.location.state.invId,
+      regen_ref: this.props.location.state.regen_ref,
       recipient_name: '',
       recipient_address: '',
       amount_dispatched: '',
@@ -34,8 +34,8 @@ class CreateDistribution extends Component {
 
   handleClose() {
     this.setState({ 
-      inventory_ref: this.props.match.params.invId,
-      regen_ref: this.props.match.params.regRef,
+      inventory_ref: this.props.location.state.invId,
+      regen_ref: this.props.location.state.regen_ref,
       recipient_name: '',
       recipient_address: '',
       amount_dispatched: '',
@@ -107,7 +107,8 @@ class CreateDistribution extends Component {
     });
   }
 
-  render() {        
+  render() {   
+  console.log(this.props)     
     return (
       <div className="container">
         <h2>Create Distribution Data</h2>
@@ -115,7 +116,7 @@ class CreateDistribution extends Component {
           <div className="form-group">      
             <label>
               GERMPLASM REQUEST NUMBER
-              <input type="text" disabled className="form-control" placeholder="Germplasm Request Number" value={this.state.germ_req_no} name="germ_req_no" onChange={this.handleChange} />
+              <input type="text" className="form-control" placeholder="Germplasm Request Number" value={this.state.germ_req_no} name="germ_req_no" onChange={this.handleChange} />
             </label> 
           </div>
           <div className="form-group">      

@@ -95,16 +95,16 @@ class Main extends Component {
               <Route path="/contact" component={Contact}/>
               <PrivateRoute user={this.state.user} path="/registration/list" component={Registration}/>
               <PrivateRoute user={this.state.user} path="/registration/create" component={CreateRegistration}/>
-              <PrivateRoute user={this.state.user} path="/registration/view/:regId" component={ViewRegistration}/>              
-              <PrivateRoute user={this.state.user} path="/registration/update/:regId" component={UpdateRegistration}/>
+              <PrivateRoute user={this.state.user} path="/registration/view/" component={ViewRegistration}/>              
+              <PrivateRoute user={this.state.user} path="/registration/update/" component={UpdateRegistration}/>
               <PrivateRoute user={this.state.user} path="/inventory/list" component={Inventory}/>
               <PrivateRoute user={this.state.user} path="/inventory/create" component={CreateInventory}/>
-              <PrivateRoute user={this.state.user} path="/inventory/view/:invId" component={ViewInventory}/>              
-              <PrivateRoute user={this.state.user} path="/inventory/update/:invId" component={UpdateInventory}/>              
+              <PrivateRoute user={this.state.user} path="/inventory/view/" component={ViewInventory}/>              
+              <PrivateRoute user={this.state.user} path="/inventory/update/" component={UpdateInventory}/>              
               <PrivateRoute user={this.state.user} path="/monitoring/list" component={Monitoring}/>
-              <PrivateRoute user={this.state.user} path="/monitoring/create/:invId/:regRef" component={CreateMonitoring}/>
+              <PrivateRoute user={this.state.user} path="/monitoring/create/" component={CreateMonitoring}/>
               <PrivateRoute user={this.state.user} path="/distribution/list" component={Distribution}/>
-              <PrivateRoute user={this.state.user} path="/distribution/create/:invId/:regRef" component={CreateDistribution}/>
+              <PrivateRoute user={this.state.user} path="/distribution/create/" component={CreateDistribution}/>
               <PrivateRoute user={this.state.user} path="/passport/list" component={Passport}/>
               
             </div>        

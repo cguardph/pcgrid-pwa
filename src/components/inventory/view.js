@@ -28,7 +28,7 @@ class ViewInventory extends Component {
       base_remarks: '',
       loading: true,
       show: false,
-      invId: this.props.match.params.invId
+      invId: this.props.location.state.id
     };    
 
     this.handleChange = this.handleChange.bind(this);
@@ -134,9 +134,14 @@ class ViewInventory extends Component {
               <p>% GERMINATION: {this.state.base_germination_rate}</p>              
               <p>STORE LOCATION: {this.state.base_store_location}</p>
               <p>REMARKS: {this.state.base_remarks}</p>
-
-              <NavLink to ={"/inventory/update/"+this.state.invId}>
-                <Button bsStyle="info" bsSize="small">Update</Button>&nbsp;&nbsp;            
+              
+              <NavLink to= {{
+                pathname: '/inventory/update',
+                state: {
+                  id: this.state.invId,
+                }
+              }} >
+                <Button bsStyle="info" bsSize="small">Update</Button>&nbsp;&nbsp;                          
               </NavLink>      
             </div>
           )}         

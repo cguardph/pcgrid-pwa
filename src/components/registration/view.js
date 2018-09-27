@@ -27,7 +27,7 @@ class ViewRegistration extends Component {
       conservation_stat: '',
       loading: true,
       show: false,
-      regId: this.props.match.params.regId
+      regId: this.props.location.state.id
     };    
 
     this.handleChange = this.handleChange.bind(this);
@@ -131,8 +131,13 @@ class ViewRegistration extends Component {
               <p>TOTAL ACTIVE WT: {this.state.total_active_wt}</p>
               <p>TOTAL BASE WT: {this.state.total_base_wt}</p>
               <p>CONSERVATION STATUS: {this.state.conservation_stat}</p>
-
-              <NavLink to ={"/registration/update/"+this.state.regId}>
+              
+              <NavLink to = {{
+                pathname: '/registration/update',
+                state: {
+                  id: this.state.regId,
+                }
+              }}>
                 <Button bsStyle="info" bsSize="small">Update</Button>&nbsp;&nbsp;            
               </NavLink>      
             </div>

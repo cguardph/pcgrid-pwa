@@ -294,8 +294,13 @@ class InventoryList extends React.Component {
       Header: '',
       width: 300,
       Cell:row => (
-        <div>                
-          <NavLink to={`/inventory/view/${row.original.id}`}>
+        <div>                          
+          <NavLink to= {{
+            pathname: '/inventory/view/',
+            state: {
+              id: row.original.id
+            }
+          }} >
             <Button bsStyle="info" bsSize="small">View</Button>&nbsp;&nbsp;            
           </NavLink>
           <Button bsStyle="info" bsSize="small" onClick={() => this.handleShowWithdrawal(row.original.id, row.original.regen_ref)} >Withdraw</Button>&nbsp;&nbsp; 
@@ -389,8 +394,15 @@ class InventoryList extends React.Component {
             <NavLink to={'/monitoring/create/'+this.state.withdrawId+'/'+this.state.withdrawRef}>
               <Button bsStyle="info" bsSize="small">Monitoring</Button>&nbsp;&nbsp;            
             </NavLink>  
-            <NavLink to={'/distribution/create/'+this.state.withdrawId+'/'+this.state.withdrawRef}>
-              <Button bsStyle="info" bsSize="small">Distribution</Button>&nbsp;&nbsp;            
+            
+            <NavLink to= {{
+              pathname: '/distribution/create',
+              state: {
+                inv_id: this.state.withdrawId,
+                regen_ref: this.state.withdrawRef
+              }
+            }} >
+              <Button bsStyle="info" bsSize="small">Distribution</Button>&nbsp;&nbsp;                              
             </NavLink>                            
             <Button onClick={this.handleCloseWithdrawal}>Cancel</Button>            
           </Modal.Footer>

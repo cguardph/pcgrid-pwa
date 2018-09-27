@@ -29,7 +29,7 @@ class UpdateRegistration extends Component {
       conservation_stat: '',
       loading: true,
       show: false,
-      regId: this.props.match.params.regId
+      regId: this.props.location.state.id
     };    
 
     this.handleChange = this.handleChange.bind(this);
