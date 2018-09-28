@@ -543,7 +543,7 @@ class RegistrationList extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={() => this.handleDelete(this.state.deleteId)}>Delete</Button>          
-            <Button onClick={this.handleCloseDelete}>Back to list</Button>            
+            <Button onClick={this.handleCloseDelete}>Back to Registration</Button>            
           </Modal.Footer>
         </Modal> 
       </div>

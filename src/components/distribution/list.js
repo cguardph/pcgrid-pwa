@@ -63,6 +63,7 @@ class DistributionList extends React.Component {
   }
   
   render() {  
+    const { fetchFilteredData } = this;
     /*var styles = {      
     };*/
     const columns = [
@@ -245,6 +246,7 @@ class DistributionList extends React.Component {
         <p>** to perform withdrawal, go to <NavLink to="/inventory/list">inventory</NavLink></p>
         
         <ReactTable
+          ref={(r)=>this.reactTable=r}
           data={data}        
           columns={columns}
           pageSize={10}          
@@ -255,7 +257,7 @@ class DistributionList extends React.Component {
           }]}  
           filterable
           defaultFilterMethod={(filter, row) =>
-            String(row[filter.id]) === filter.value}     
+            String(row[filter.id]) === filter.value}   
         />
 
         <Modal show={this.state.showDelete} onHide={this.handleCloseDelete} animation={false}>

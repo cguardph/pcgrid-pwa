@@ -114,8 +114,11 @@ class CreateInventory extends Component {
     }).catch(err => {
       //handle error
     });
-    this.state.total_active_wt = parseFloat(this.state.total_active_wt) + parseFloat(this.state.active_seed_wt);
-    this.state.total_base_wt = parseFloat(this.state.total_base_wt) + parseFloat(this.state.base_seed_wt);
+
+    this.setState({
+      total_active_wt : parseFloat(this.state.total_active_wt) + parseFloat(this.state.active_seed_wt),
+      total_base_wt : parseFloat(this.state.total_base_wt) + parseFloat(this.state.base_seed_wt),
+    })    
   }
 
   render() {        

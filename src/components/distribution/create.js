@@ -8,8 +8,10 @@ class CreateDistribution extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inventory_ref: this.props.location.state.invId,
+      inventory_ref: this.props.location.state.inv_id,
       regen_ref: this.props.location.state.regen_ref,
+      registration_ref: this.props.location.state.registration_ref,
+      germ_req_no: '',
       recipient_name: '',
       recipient_address: '',
       amount_dispatched: '',
@@ -23,6 +25,10 @@ class CreateDistribution extends Component {
       mta_matters: '',
       remarks: '',
       
+      reg_total_active_wt: '',
+      inv_active_seed_wt: '',
+      registration: '',
+
       show: false
     };    
 
@@ -34,8 +40,10 @@ class CreateDistribution extends Component {
 
   handleClose() {
     this.setState({ 
-      inventory_ref: this.props.location.state.invId,
+      inventory_ref: this.props.location.state.inv_id,
       regen_ref: this.props.location.state.regen_ref,
+      registration_ref: this.props.location.state.registration_ref,
+      germ_req_no: '',
       recipient_name: '',
       recipient_address: '',
       amount_dispatched: '',
@@ -48,6 +56,9 @@ class CreateDistribution extends Component {
       mode: '',
       mta_matters: '',
       remarks: '',
+
+      reg_total_active_wt: '',
+      inv_active_seed_wt: '',
      
       show: false }); 
   }
@@ -68,6 +79,8 @@ class CreateDistribution extends Component {
   handleSubmit(event) {
     const inventory_ref = this.state.inventory_ref;
     const regen_ref = this.state.regen_ref; 
+    const registration_ref = this.state.registration_ref;
+    const germ_req_no = this.state.germ_req_no;
     const recipient_name = this.state.recipient_name; 
     const recipient_address = this.state.recipient_address; 
     const amount_dispatched = this.state.amount_dispatched; 
@@ -85,6 +98,8 @@ class CreateDistribution extends Component {
     const data = {
       inventory_ref,
       regen_ref,  
+      registration_ref,
+      germ_req_no,
       recipient_name,
       recipient_address,
       amount_dispatched,
@@ -99,16 +114,48 @@ class CreateDistribution extends Component {
       remarks    
     };    
     event.preventDefault();
+
+    console.log(this.state)
+
+    base.get('registration/'+this.state.registration_ref, {
+      context: this,
+    }).then( data => {
+      this.setState({
+        reg_total_active_wt: data.total_active_wt,  
+        registration : data      
+      });
+
+      base.updateDoc('registration/'+this.state.registration_ref, {
+        total_active_wt : parseFloat(this.state.reg_total_active_wt) - parseFloat(this.state.amount_dispatched),
+      });
+    });
+
+    base.get('inventory/'+this.state.inventory_ref, {
+      context: this,
+    }).then( data => {
+      this.setState({
+        inv_active_seed_wt: data.active_seed_wt,        
+      });
+
+      base.updateDoc('inventory/'+this.state.inventory_ref, {
+        active_seed_wt : parseFloat(this.state.inv_active_seed_wt) - parseFloat(this.state.amount_dispatched),
+      });
+    });
+       
     base.addToCollection('distribution', data)
       .then(() => {
         //document is added to the collection
       }).catch(err => {
       //handle error
     });
+
+    this.setState({
+      total_active_wt : parseFloat(this.state.reg_total_active_wt) - parseFloat(this.state.amount_dispatched),
+      active_seed_wt : parseFloat(this.state.inv_active_seed_wt) - parseFloat(this.state.amount_dispatched),
+    })
   }
 
-  render() {   
-  console.log(this.props)     
+  render() {      
     return (
       <div className="container">
         <h2>Create Distribution Data</h2>
@@ -207,14 +254,14 @@ class CreateDistribution extends Component {
           </Modal.Header>
           <Modal.Body>             
             <p>
-              Successfully created withdrawal for regeneration.
+              Successfully created withdrawal for distribution.
             </p>
           </Modal.Body>
           <Modal.Footer>            
             <NavLink to="/inventory/list">
               <Button onClick={this.handleClose}>Back to Inventory</Button>
             </NavLink>
-            <NavLink to="/regeneration/list">
+            <NavLink to="/distribution/list">
               <Button onClick={this.handleClose}>Go to Distribution</Button>
             </NavLink>
           </Modal.Footer>

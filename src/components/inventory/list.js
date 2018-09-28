@@ -25,6 +25,7 @@ class InventoryList extends React.Component {
       delete_registration_ref: '',    
       withdrawId: '',
       withdrawRef: '',
+      registrationRef: '',
 
       delete_active_seed_wt: '',
       delete_base_seed_wt: '',
@@ -102,11 +103,12 @@ class InventoryList extends React.Component {
     this.setState({ showDelete: false });
   }
 
-  handleShowWithdrawal(id, ref) {
+  handleShowWithdrawal(id, ref, reg_ref) {
     this.setState({
      showWithdrawal: true,
      withdrawId: id,
      withdrawRef: ref,
+     registrationRef: reg_ref
    });    
   }
 
@@ -303,7 +305,7 @@ class InventoryList extends React.Component {
           }} >
             <Button bsStyle="info" bsSize="small">View</Button>&nbsp;&nbsp;            
           </NavLink>
-          <Button bsStyle="info" bsSize="small" onClick={() => this.handleShowWithdrawal(row.original.id, row.original.regen_ref)} >Withdraw</Button>&nbsp;&nbsp; 
+          <Button bsStyle="info" bsSize="small" onClick={() => this.handleShowWithdrawal(row.original.id, row.original.regen_ref, row.original.registration_ref)} >Withdraw</Button>&nbsp;&nbsp; 
           <Button bsStyle="danger" bsSize="small" onClick={() => this.handleShowDelete(row.original.id, row.original.registration_ref, row.original.active_seed_wt, row.original.base_seed_wt)} >Delete</Button>
         </div>
       ),
@@ -399,7 +401,8 @@ class InventoryList extends React.Component {
               pathname: '/distribution/create',
               state: {
                 inv_id: this.state.withdrawId,
-                regen_ref: this.state.withdrawRef
+                regen_ref: this.state.withdrawRef,
+                registration_ref: this.state.registrationRef
               }
             }} >
               <Button bsStyle="info" bsSize="small">Distribution</Button>&nbsp;&nbsp;                              

@@ -10,12 +10,12 @@ class Distribution extends Component {
     super(props);
     this.state = {
       list: [],
-      loading: false
+      loading: true,
     };
   }
 
   componentDidMount() {
-   /* this.ref = base.bindCollection('distribution', {
+    this.ref = base.bindCollection('distribution', {
       context: this,
       state: 'list',
       withRefs: true,
@@ -23,7 +23,7 @@ class Distribution extends Component {
       then() {
         this.setState({ loading: false });
       }
-    });*/
+    });
   }
   
   render() {
