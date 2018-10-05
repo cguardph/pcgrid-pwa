@@ -21,12 +21,12 @@ class InventoryList extends React.Component {
     this.state = {
       showDelete: false,
       showWithdrawal: false,
-      deleteId: '',
-      delete_registration_ref: '',    
       withdrawId: '',
       withdrawRef: '',
       registrationRef: '',
 
+      deleteId: '',
+      delete_registration_ref: '',    
       delete_active_seed_wt: '',
       delete_base_seed_wt: '',
       reg_total_active_wt: '',
@@ -313,11 +313,7 @@ class InventoryList extends React.Component {
       filterable: false
     } 
     ]
-    const data = [{
-      regen_ref: '1231',
-      packaging_date: '01-01-2016',      
-    }
-    ]
+    const data = []
     /*var listItems = */this.props.items.map((item, index) => {
       return (
         data.push(item)        

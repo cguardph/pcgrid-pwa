@@ -10,12 +10,12 @@ class Monitoring extends Component {
     super(props);
     this.state = {
       list: [],
-      loading: false
+      loading: true
     };
   }
 
   componentDidMount() {
-   /* this.ref = base.bindCollection('regeneration', {
+    this.ref = base.bindCollection('regeneration', {
       context: this,
       state: 'list',
       withRefs: true,
@@ -23,7 +23,7 @@ class Monitoring extends Component {
       then() {
         this.setState({ loading: false });
       }
-    });*/
+    });
   }
   
   render() {

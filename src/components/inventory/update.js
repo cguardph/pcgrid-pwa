@@ -8,7 +8,8 @@ import Loader from "../loader";
 
 class UpdateInventory extends Component {
   constructor(props) {
-    super(props);
+    super(props);    
+    console.log(props)
     this.state = {
       regen_ref: '',
       acc_no: '',
@@ -55,6 +56,10 @@ class UpdateInventory extends Component {
         });
       }
     });
+  }
+
+  componentWillUnmount(){    
+    this.props.history.push(this.state)    
   }
 
   handleClose() {
@@ -147,7 +152,7 @@ class UpdateInventory extends Component {
     
   }
 
-  render() {    
+  render() {          
     return (
       <div className="container">
         <h2>Update Inventory Data</h2>
@@ -213,7 +218,12 @@ class UpdateInventory extends Component {
                 </div>               
                 <div className="form-group form-inline">      
                   <Button type="submit" value="Submit" bsStyle="success" onClick={this.handleShow}>Update</Button>  
-                  <NavLink to ={"/inventory/view/"+this.state.invId}>
+                  <NavLink to= {{
+                    pathname: '/inventory/view/',
+                    state: {
+                      id: this.props.location.state.id,
+                    }
+                  }} >
                     <Button onClick={this.handleClose}>Back to view</Button>
                   </NavLink>
                 </div>

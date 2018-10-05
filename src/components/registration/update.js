@@ -222,7 +222,12 @@ class UpdateRegistration extends Component {
                 </div>
                 <div className="form-group form-inline">      
                   <Button type="submit" value="Submit" bsStyle="success" onClick={this.handleShow}>Update</Button>  
-                  <NavLink to ={"/registration/view/"+this.state.regId}>
+                  <NavLink to= {{
+                    pathname: '/registration/view/',
+                    state: {
+                      id: this.props.location.state.id,
+                    }
+                  }} >
                     <Button onClick={this.handleClose}>Back to view</Button>
                   </NavLink>
                 </div>

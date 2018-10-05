@@ -113,9 +113,7 @@ class CreateDistribution extends Component {
       mta_matters,
       remarks    
     };    
-    event.preventDefault();
-
-    console.log(this.state)
+    event.preventDefault();    
 
     base.get('registration/'+this.state.registration_ref, {
       context: this,

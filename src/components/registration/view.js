@@ -30,8 +30,7 @@ class ViewRegistration extends Component {
       regId: this.props.location.state.id
     };    
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);    
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
@@ -61,49 +60,6 @@ class ViewRegistration extends Component {
 
     this.setState({
       [name]: value
-    });
-  }
-
-  handleSubmit(event) {
-    const npgrl_cereals_no = this.state.npgrl_cereals_no;
-    const gb_no = this.state.gb_no;
-    const phl = this.state.phl;
-    const acc = this.state.acc;
-    const other_no = this.state.other_no;
-    const apn = this.state.apn;
-    const local_name = this.state.local_name;
-    const region = this.state.region;
-    const date_received = this.state.date_received;
-    const crop = this.state.crop;
-    const genus = this.state.genus;
-    const species = this.state.species;
-    const total_active_wt = this.state.total_active_wt;
-    const total_base_wt = this.state.total_base_wt;
-    const conservation_stat = this.state.conservation_stat;
-
-    const data = {
-      npgrl_cereals_no,     
-      gb_no,
-      phl,
-      acc,
-      other_no,
-      apn,
-      local_name,
-      region,
-      date_received,
-      crop,
-      genus,
-      species,
-      total_active_wt,
-      total_base_wt,
-      conservation_stat,
-    };    
-    event.preventDefault();
-    base.updateDoc('registration/'+this.state.regId, data)
-      .then(() => {
-        //document is added to the collection
-      }).catch(err => {
-      //handle error
     });
   }
 

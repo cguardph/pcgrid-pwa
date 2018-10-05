@@ -92,12 +92,7 @@ class RegenerationList extends React.Component {
       filterable: false
     }
     ]
-    const data = [{
-      regen_ref: "12345",
-      packaging_date: "01-15-2017",
-      active_seed_wt: 100,
-      id: "nyahaha",
-    }]
+    const data = []
     /*var listItems = */this.props.items.map((item, index) => {
       return (
         data.push(item)        

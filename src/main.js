@@ -22,6 +22,8 @@ import Monitoring from "./components/monitoring/index";
 import CreateMonitoring from "./components/monitoring/create";
 import Distribution from "./components/distribution/index";
 import CreateDistribution from "./components/distribution/create";
+import ViewDistribution from "./components/distribution/view";
+import UpdateDistribution from "./components/distribution/update";
 import Passport from "./components/passport/index";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -105,6 +107,8 @@ class Main extends Component {
               <PrivateRoute user={this.state.user} path="/monitoring/create/" component={CreateMonitoring}/>
               <PrivateRoute user={this.state.user} path="/distribution/list" component={Distribution}/>
               <PrivateRoute user={this.state.user} path="/distribution/create/" component={CreateDistribution}/>
+              <PrivateRoute user={this.state.user} path="/distribution/view/" component={ViewDistribution}/>
+              <PrivateRoute user={this.state.user} path="/distribution/update/" component={UpdateDistribution}/>
               <PrivateRoute user={this.state.user} path="/passport/list" component={Passport}/>
               
             </div>        

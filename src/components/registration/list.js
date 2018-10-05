@@ -467,11 +467,7 @@ class RegistrationList extends React.Component {
       filterable: false
     }
     ]
-    const data = [{
-      id: '2345',
-      phl: '12345',
-      total_base_wt: 0,
-    }]
+    const data = []
     /*var listItems = */this.props.items.map((item, index) => {
       return (
         data.push(item)        
